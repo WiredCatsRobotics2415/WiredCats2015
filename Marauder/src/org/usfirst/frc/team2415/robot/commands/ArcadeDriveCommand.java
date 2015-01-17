@@ -1,20 +1,20 @@
 package org.usfirst.frc.team2415.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import org.usfirst.frc.team2415.robot.Robot;
 
 /**
  *
  */
-public class TankDriveCommand extends Command {
-	
+public class ArcadeDriveCommand extends Command {
+
 	private final float DEADBAND = 0;
 	private final float SOME_VAR = 1;
 	
-    public TankDriveCommand() {
+    public ArcadeDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	
     	requires(Robot.driveSubsystem);
     }
 
@@ -25,16 +25,19 @@ public class TankDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double leftVal = Robot.gamepad.leftY();
-    	double rightVal = Robot.gamepad.rightY();
+    	double leftStick = Robot.gamepad.leftY();
+    	double rightStick = Robot.gamepad.rightX();
     	
-    	if(Math.abs(leftVal) <= DEADBAND) leftVal = 0;
-    	if(Math.abs(rightVal) <= DEADBAND) rightVal = 0;
+    	if(Math.abs(leftStick) <= DEADBAND) leftStick = 0;
+    	if(Math.abs(rightStick) <= DEADBAND) rightStick = 0;
     	
-    	leftVal = Math.pow(leftVal, 3)*SOME_VAR + leftVal*(1-SOME_VAR);
-    	rightVal = Math.pow(rightVal, 3)*SOME_VAR + rightVal*(1-SOME_VAR);
+    	leftStick = Math.pow(leftStick, 3)*SOME_VAR + leftStick*(1-SOME_VAR);
+    	rightStick = Math.pow(rightStick, 3)*SOME_VAR + rightStick*(1-SOME_VAR);
     	
-    	Robot.driveSubsystem.setLeftRight(leftVal, rightVal);
+    	double left = leftStick + rightStick;
+    	double right = leftStick - rightStick;
+    	
+    	Robot.driveSubsystem.setLeftRight(left, right);
     }
 
     // Make this return true when this Command no longer needs to run execute()

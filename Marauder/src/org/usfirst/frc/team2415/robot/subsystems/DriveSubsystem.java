@@ -14,7 +14,7 @@ public class DriveSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	Talon left, right;
+	private Talon left, right;
 	
 	public DriveSubsystem(){
 		System.out.println("Drive Subsystem Created!");
