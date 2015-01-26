@@ -12,15 +12,27 @@ public class AutoStraightDriveCommand extends Command {
 	private float currentVelocity;
 	private float desiredVelocity;
 	
-    public AutoStraightDriveCommand(float destination) {
+	private double velPower;
+	private double strPower;
+	
+	private boolean forwards;
+	
+    public AutoStraightDriveCommand(float destination, boolean forwards) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveSubsystem);
     	this.destination = destination;
+    	this.forwards = forwards;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	currentPosition = 0;
+    	currentVelocity = 0;
+    	desiredVelocity = 0;
+    	velPower = 0;
+    	strPower = 0;
+    	
     	Robot.driveSubsystem.setLeftRight(0, 0);
     }
 
@@ -29,7 +41,19 @@ public class AutoStraightDriveCommand extends Command {
     	currentPosition = Robot.driveSubsystem.getDistance();
     	
     	currentVelocity = Robot.driveSubsystem.getRate();
-    	desiredVelocity = getDesiredVelocity();
+    	desiredVelocity = getDesiredVelocity(currentPosition);
+    	
+    	double left, right;
+    	
+    	if(forwards){
+    		left = velPower + strPower;
+    		right =  velPower - strPower;
+    	}else{
+    		left = velPower - strPower;
+    		right =  velPower + strPower;
+    	}
+    	
+    	Robot.driveSubsystem.setLeftRight(left, right);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -48,7 +72,14 @@ public class AutoStraightDriveCommand extends Command {
     	Robot.driveSubsystem.setLeftRight(0, 0);
     }
     
-    public float getDesiredVelocity(){
-    	return 0;
+    public float getDesiredVelocity(float position){
+	    if (position < 1f){
+	        return (float)((Robot.driveSubsystem.maxVelocity-Robot.driveSubsystem.motor_dead_band))*position+Robot.driveSubsystem.motor_dead_band;
+	    } else if ( position > destination - Robot.driveSubsystem.decceleration_dist){
+	        float m = -Robot.driveSubsystem.maxVelocity/Robot.driveSubsystem.decceleration_dist;
+	        return m * (position - (destination - Robot.driveSubsystem.decceleration_dist)) + Robot.driveSubsystem.maxVelocity;
+	    } else {
+	        return Robot.driveSubsystem.maxVelocity;
+	    }
     }
 }

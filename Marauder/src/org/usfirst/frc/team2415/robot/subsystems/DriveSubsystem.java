@@ -20,6 +20,12 @@ public class DriveSubsystem extends Subsystem {
 	private Talon left, right;
 	
 	private Encoder leftEncoder, rightEncoder;
+
+	public int maxVelocity;
+
+	public float decceleration_dist;
+
+	public int motor_dead_band;
 	
 	public DriveSubsystem(){
 		System.out.println("Drive Subsystem Created!");
