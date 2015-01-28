@@ -20,7 +20,7 @@ public class TankDriveCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.driveSubsystem.setLeftRight(0, 0);
+    	Robot.driveSubsystem.setMotors(0, 0);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -34,7 +34,7 @@ public class TankDriveCommand extends Command {
     	leftVal = Math.pow(leftVal, 3)*SOME_VAR + leftVal*(1-SOME_VAR);
     	rightVal = Math.pow(rightVal, 3)*SOME_VAR + rightVal*(1-SOME_VAR);
     	
-    	Robot.driveSubsystem.setLeftRight(leftVal, rightVal);
+    	Robot.driveSubsystem.setMotors(leftVal, rightVal);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -44,12 +44,12 @@ public class TankDriveCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveSubsystem.setLeftRight(0, 0);
+    	Robot.driveSubsystem.setMotors(0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.driveSubsystem.setLeftRight(0, 0);
+    	Robot.driveSubsystem.setMotors(0, 0);
     }
 }
