@@ -1,18 +1,18 @@
 package org.usfirst.frc.team2415.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-
 import org.usfirst.frc.team2415.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ArcadeDriveCommand extends Command {
-
-	private final float DEADBAND = 0;
-	private final float SOME_VAR = 1;
+public class PsuedoCrabDriveCommand extends Command {
 	
-    public ArcadeDriveCommand() {
+	private final float DEADBAND = 0;
+	private final float INTERPOLATION_FACTOR = 0;
+
+    public PsuedoCrabDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveSubsystem);
@@ -25,19 +25,24 @@ public class ArcadeDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double leftStick = Robot.gamepad.leftY();
-    	double rightStick = Robot.gamepad.rightX();
+    	double leftX = Robot.gamepad.leftX();
+    	double leftY = Robot.gamepad.leftY();
+
+    	double rightX = Robot.gamepad.leftX();
     	
-    	if(Math.abs(leftStick) <= DEADBAND) leftStick = 0;
-    	if(Math.abs(rightStick) <= DEADBAND) rightStick = 0;
+    	if(leftY < DEADBAND) leftY = 0;
+    	if(leftX < DEADBAND) leftX = 0;
+    	if(rightX < DEADBAND) rightX = 0;
     	
-    	leftStick = Math.pow(leftStick, 3)*SOME_VAR + leftStick*(1-SOME_VAR);
-    	rightStick = Math.pow(rightStick, 3)*SOME_VAR + rightStick*(1-SOME_VAR);
+    	leftX = Math.pow(leftX, 3)*INTERPOLATION_FACTOR + leftX*(1-INTERPOLATION_FACTOR);
+    	leftY = Math.pow(leftY, 3)*INTERPOLATION_FACTOR + leftY*(1-INTERPOLATION_FACTOR);
+    	rightX = Math.pow(rightX, 3)*INTERPOLATION_FACTOR + rightX*(1-INTERPOLATION_FACTOR);
     	
-    	double left = leftStick + rightStick;
-    	double right = leftStick - rightStick;
+    	double left = leftY + rightX;
+    	double right = leftY - rightX;
+    	double middle = leftX;
     	
-    	Robot.driveSubsystem.setMotors(left, right);
+    	Robot.driveSubsystem.setMotors(left, right, middle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
