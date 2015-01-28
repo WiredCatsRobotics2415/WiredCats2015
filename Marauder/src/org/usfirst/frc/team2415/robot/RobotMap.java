@@ -29,4 +29,10 @@ public class RobotMap {
 	public static final int LEFT_ENCODER_B = 0;
 	public static final int RIGHT_ENCODER_A = 0;
 	public static final int RIGHT_ENCODER_B = 0;
+	
+	public static final int LEFT_CHEEK1 = 0;
+	public static final int LEFT_CHEEK2 = 0;
+	public static final int RIGHT_CHEEK1 = 0;
+	public static final int RIGHT_CHEEK2 = 0;
+	public static final int BOOTYMODNUM = 0;  // not sure if we need more modules so yeah
 }
