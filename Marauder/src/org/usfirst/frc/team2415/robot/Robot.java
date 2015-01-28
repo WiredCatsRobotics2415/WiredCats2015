@@ -1,6 +1,7 @@
 
 package org.usfirst.frc.team2415.robot;
 
+import org.usfirst.frc.team2415.robot.commands.*;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -21,6 +22,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	
 	public static DriveSubsystem driveSubsystem;
+	public static BootySubsystem bootySubsystem;
 	
 	public static GamePad gamepad;
 
@@ -34,8 +36,11 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
 		driveSubsystem = new DriveSubsystem();
+		bootySubsystem = new BootySubsystem();
 		
 		gamepad = new GamePad(0);
+		
+		gamepad.a_button.whenPressed(new ToggleMakeItClapCommand());
 		
         // instantiate the command used for the autonomous period
         autonomousCommand = new ExampleCommand();
