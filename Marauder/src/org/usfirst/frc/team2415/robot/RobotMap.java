@@ -15,8 +15,9 @@ public class RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
-	public static final int TALON_LEFT = 0;
-	public static final int TALON_RIGHT = 0;
+	
+	
+	//TODO: Set correct port values once systems are finished!
 	
 	public static final int TALON_LEFT_1 = 0;
 	public static final int TALON_LEFT_2 = 0;
@@ -34,5 +35,6 @@ public class RobotMap {
 	public static final int LEFT_CHEEK2 = 0;
 	public static final int RIGHT_CHEEK1 = 0;
 	public static final int RIGHT_CHEEK2 = 0;
-	public static final int BOOTYMODNUM = 0;  // not sure if we need more modules so yeah
+	
+	public static final int GYRO = 0;
 }
