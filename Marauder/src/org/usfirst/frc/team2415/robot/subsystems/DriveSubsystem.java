@@ -2,11 +2,10 @@ package org.usfirst.frc.team2415.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Gyro;
 import org.usfirst.frc.team2415.robot.RobotMap;
-import org.usfirst.frc.team2415.robot.commands.TankDriveCommand;
-import org.usfirst.frc.team2415.robot.commands.ArcadeDriveCommand;
+import org.usfirst.frc.team2415.robot.commands.PsuedoCrabDriveCommand;
 
 /**
  *
@@ -20,7 +19,7 @@ public class DriveSubsystem extends Subsystem {
 	
 	private Transmission left, right, middle;
 	
-	private CANTalon leftTalon, rightTalon;
+	private Gyro gyro;
 	
 	private Encoder leftEncoder, rightEncoder;
 
@@ -31,16 +30,6 @@ public class DriveSubsystem extends Subsystem {
 	public int motor_dead_band;
 	
 	public DriveSubsystem(){
-		leftTalon = new CANTalon(RobotMap.TALON_LEFT);
-		rightTalon = new CANTalon(RobotMap.TALON_RIGHT);
-		
-		leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_A, RobotMap.LEFT_ENCODER_B);
-		rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_A, RobotMap.RIGHT_ENCODER_B);
-		
-		resetEncoders();
-	}
-	
-	public DriveSubsystem(String driveType){
 		System.out.println("Drive Subsystem Created!");
 		left = new Transmission(RobotMap.TALON_LEFT_1, RobotMap.TALON_LEFT_2);
 		right = new Transmission(RobotMap.TALON_RIGHT_1, RobotMap.TALON_RIGHT_2);
@@ -49,17 +38,14 @@ public class DriveSubsystem extends Subsystem {
 		leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_A, RobotMap.LEFT_ENCODER_B);
 		rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_A, RobotMap.RIGHT_ENCODER_B);
 		
+		gyro = new Gyro(RobotMap.GYRO);
+		
 		resetEncoders();
 	}
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-    	setDefaultCommand(new ArcadeDriveCommand());
-    }
-    
-    public void setMotors(double left, double right){
-    	leftTalon.set(left);
-    	rightTalon.set(right);
+    	setDefaultCommand(new PsuedoCrabDriveCommand());
     }
     
     public void setMotors(double left, double right, double middle){
@@ -81,6 +67,14 @@ public class DriveSubsystem extends Subsystem {
     public float getDistance(){
     	//returns distance traveled in feet
     	return TICK_TO_FEET*(float)Math.max(Math.abs(leftEncoder.getRaw()), Math.abs(rightEncoder.getRate()));
+    }
+    
+    public double getAngle(){
+    	return gyro.getAngle();
+    }
+    
+    public void resetGyro(){
+    	gyro.reset();
     }
     
 }
