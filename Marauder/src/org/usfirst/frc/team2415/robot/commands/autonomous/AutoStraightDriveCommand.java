@@ -33,7 +33,7 @@ public class AutoStraightDriveCommand extends Command {
     	velPower = 0;
     	strPower = 0;
     	
-    	Robot.driveSubsystem.setMotors(0, 0);
+    	Robot.driveSubsystem.setMotors(0, 0, 0);
     }
     
 
@@ -55,7 +55,7 @@ public class AutoStraightDriveCommand extends Command {
     		right =  velPower + strPower;
     	}
     	
-    	Robot.driveSubsystem.setMotors(left, right);
+    	Robot.driveSubsystem.setMotors(left, right, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -65,13 +65,13 @@ public class AutoStraightDriveCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.driveSubsystem.setMotors(0, 0);
+    	Robot.driveSubsystem.setMotors(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.driveSubsystem.setMotors(0, 0);
+    	Robot.driveSubsystem.setMotors(0, 0, 0);
     }
     
     public float getDesiredVelocity(float position){
