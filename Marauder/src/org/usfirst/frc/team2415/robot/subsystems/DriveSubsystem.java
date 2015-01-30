@@ -1,11 +1,9 @@
 package org.usfirst.frc.team2415.robot.subsystems;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
-
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Gyro;
 import org.usfirst.frc.team2415.robot.RobotMap;
 import org.usfirst.frc.team2415.robot.commands.PsuedoCrabDriveCommand;
+
+import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
  *
@@ -15,13 +13,9 @@ public class DriveSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private final float TICK_TO_FEET = 0;
-	
 	private Transmission left, right, middle;
 	
-	private Gyro gyro;
-	
-	private Encoder leftEncoder, rightEncoder;
+	//private Gyro gyro;
 
 	public int maxVelocity;
 
@@ -31,16 +25,13 @@ public class DriveSubsystem extends Subsystem {
 	
 	public DriveSubsystem(){
 		System.out.println("Drive Subsystem Created!");
-		left = new Transmission(RobotMap.TALON_LEFT_1, RobotMap.TALON_LEFT_2);
-		right = new Transmission(RobotMap.TALON_RIGHT_1, RobotMap.TALON_RIGHT_2);
-		middle = new Transmission(RobotMap.TALON_MIDDLE_1, RobotMap.TALON_MIDDLE_2);
+		left = new Transmission(RobotMap.LEFT_TALONS, RobotMap.LEFT_ENCODER);
+		right = new Transmission(RobotMap.RIGHT_TALONS, RobotMap.RIGHT_ENCODER);
+		middle = new Transmission(RobotMap.MIDDLE_TALONS, RobotMap.MIDDLE_ENCODER);
 		
-		leftEncoder = new Encoder(RobotMap.LEFT_ENCODER_A, RobotMap.LEFT_ENCODER_B);
-		rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER_A, RobotMap.RIGHT_ENCODER_B);
+		//gyro = new Gyro(RobotMap.GYRO);
 		
-		gyro = new Gyro(RobotMap.GYRO);
-		
-		resetEncoders();
+		//resetEncoders();
 	}
 
     public void initDefaultCommand() {
@@ -55,27 +46,28 @@ public class DriveSubsystem extends Subsystem {
     }
     
     public void resetEncoders(){
-    	leftEncoder.reset();
-    	rightEncoder.reset();
+    	left.resetEncoder();
+    	right.resetEncoder();
+    	middle.resetEncoder();
     }
     
     public float getRate(){
     	//returns a rate in feet per seconds
-    	return TICK_TO_FEET*(float)Math.max(leftEncoder.getRate(), rightEncoder.getRate());
+    	return (float)Math.max(left.getRate(), right.getRate());
     }
     
     public float getDistance(){
     	//returns distance traveled in feet
-    	return TICK_TO_FEET*(float)Math.max(Math.abs(leftEncoder.getRaw()), Math.abs(rightEncoder.getRate()));
+    	return (float)Math.max(left.getDistance(), right.getDistance());
     }
-    
+    /*
     public double getAngle(){
     	return gyro.getAngle();
     }
     
     public void resetGyro(){
     	gyro.reset();
-    }
+    }*/
     
 }
 

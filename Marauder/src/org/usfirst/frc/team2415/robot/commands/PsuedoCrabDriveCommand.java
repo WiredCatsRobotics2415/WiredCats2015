@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class PsuedoCrabDriveCommand extends Command {
 	
 	private final float DEADBAND = 0;
-	private final float INTERPOLATION_FACTOR = 0;
+	private final float INTERPOLATION_FACTOR = 1;
 
     public PsuedoCrabDriveCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -30,9 +30,9 @@ public class PsuedoCrabDriveCommand extends Command {
 
     	double rightX = Robot.gamepad.leftX();
     	
-    	if(leftY < DEADBAND) leftY = 0;
-    	if(leftX < DEADBAND) leftX = 0;
-    	if(rightX < DEADBAND) rightX = 0;
+    	if(Math.abs(leftY) < DEADBAND) leftY = 0;
+    	if(Math.abs(leftX) < DEADBAND) leftX = 0;
+    	if(Math.abs(rightX) < DEADBAND) rightX = 0;
     	
     	leftX = Math.pow(leftX, 3)*INTERPOLATION_FACTOR + leftX*(1-INTERPOLATION_FACTOR);
     	leftY = Math.pow(leftY, 3)*INTERPOLATION_FACTOR + leftY*(1-INTERPOLATION_FACTOR);
@@ -42,7 +42,7 @@ public class PsuedoCrabDriveCommand extends Command {
     	double right = leftY - rightX;
     	double middle = leftX;
     	
-    	Robot.driveSubsystem.setMotors(left, right, middle);
+    	Robot.driveSubsystem.setMotors(-left, right, middle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
