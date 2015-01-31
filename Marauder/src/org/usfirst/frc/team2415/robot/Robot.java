@@ -6,8 +6,9 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import org.usfirst.frc.team2415.robot.commands.ExampleCommand;
 import org.usfirst.frc.team2415.robot.subsystems.*;
+
+import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -17,16 +18,15 @@ import org.usfirst.frc.team2415.robot.subsystems.*;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-	public static final ExampleSubsystem exampleSubsystem = new ExampleSubsystem();
 	public static OI oi;
 	
 	public static DriveSubsystem driveSubsystem;
-	//public static BootySubsystem bootySubsystem;
+	public static BootySubsystem bootySubsystem;
+	public static IntakeSubsystem intakeSubsystem;
 	
 	public static GamePad gamepad;
-
-    Command autonomousCommand;
+	
+	public static Joystick tempStick;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -36,14 +36,16 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
 		driveSubsystem = new DriveSubsystem();
-		//bootySubsystem = new BootySubsystem();
+		bootySubsystem = new BootySubsystem();
+		intakeSubsystem = new IntakeSubsystem();
 		
 		gamepad = new GamePad(0);
+		
+		tempStick = new Joystick(1);
 		
 		gamepad.a_button.whenPressed(new ToggleMakeItClapCommand());
 		
         // instantiate the command used for the autonomous period
-        autonomousCommand = new ExampleCommand();
     }
 	
 	public void disabledPeriodic() {
@@ -52,7 +54,7 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-        if (autonomousCommand != null) autonomousCommand.start();
+        //if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**
@@ -67,7 +69,7 @@ public class Robot extends IterativeRobot {
         // teleop starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        if (autonomousCommand != null) autonomousCommand.cancel();
+        //if (autonomousCommand != null) autonomousCommand.cancel();
     }
 
     /**

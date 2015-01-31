@@ -19,9 +19,11 @@ public class RobotMap {
 	
 	//TODO: Set correct port values once systems are finished!
 	
-	public static final int[] LEFT_TALONS = {1,2};
-	public static final int[] RIGHT_TALONS = {4,5};
-	public static final int[] MIDDLE_TALONS = {0,3};
+	public static final int LEFT_TALON = 2;
+	public static final int RIGHT_TALON = 4;
+	public static final int MIDDLE_TALON = 3;
+	
+	public static final int[] INTAKE_TALONS = {0,0};
 	
 	public static final int[] LEFT_ENCODER = {0,0};
 	public static final int[] RIGHT_ENCODER = {0,0};
