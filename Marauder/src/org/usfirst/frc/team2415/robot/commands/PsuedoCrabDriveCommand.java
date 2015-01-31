@@ -28,7 +28,7 @@ public class PsuedoCrabDriveCommand extends Command {
     	double leftX = Robot.gamepad.leftX();
     	double leftY = Robot.gamepad.leftY();
 
-    	double rightX = Robot.gamepad.leftX();
+    	double rightX = Robot.gamepad.rightX();
     	
     	if(Math.abs(leftY) < DEADBAND) leftY = 0;
     	if(Math.abs(leftX) < DEADBAND) leftX = 0;
@@ -38,11 +38,11 @@ public class PsuedoCrabDriveCommand extends Command {
     	leftY = Math.pow(leftY, 3)*INTERPOLATION_FACTOR + leftY*(1-INTERPOLATION_FACTOR);
     	rightX = Math.pow(rightX, 3)*INTERPOLATION_FACTOR + rightX*(1-INTERPOLATION_FACTOR);
     	
-    	double left = leftY + rightX;
-    	double right = leftY - rightX;
+    	double left = leftY - rightX;
+    	double right = leftY + rightX;
     	double middle = leftX;
     	
-    	Robot.driveSubsystem.setMotors(-left, right, middle);
+    	Robot.driveSubsystem.setMotors(left, -right, -middle);
     }
 
     // Make this return true when this Command no longer needs to run execute()
