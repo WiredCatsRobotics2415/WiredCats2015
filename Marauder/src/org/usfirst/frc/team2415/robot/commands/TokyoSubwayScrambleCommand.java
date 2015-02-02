@@ -1,18 +1,25 @@
 package org.usfirst.frc.team2415.robot.commands;
 
+import org.usfirst.frc.team2415.robot.Robot;
+
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class Nitro extends Command {
-
+public class TokyoSubwayScrambleCommand extends Command {
+	
+	I2C i2c;
+	int registerAddress = 4;
+	int data = 1;
+	
 	@Override
 	protected void initialize() {
-		// TODO Auto-generated method stub
+		I2C i2c = new I2C(I2C.Port.kOnboard, 0);
 		
 	}
 
 	@Override
 	protected void execute() {
-		// TODO Auto-generated method stub
+		Robot.tokyoSubsystem.write(registerAddress, data);
 
 	}
 

@@ -2,10 +2,13 @@
 package org.usfirst.frc.team2415.robot;
 
 import org.usfirst.frc.team2415.robot.commands.*;
+
+import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import org.usfirst.frc.team2415.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.Joystick;
@@ -23,6 +26,7 @@ public class Robot extends IterativeRobot {
 	public static DriveSubsystem driveSubsystem;
 	public static BootySubsystem bootySubsystem;
 	public static IntakeSubsystem intakeSubsystem;
+	public static TokyoSubsystem tokyoSubsystem;
 	
 	public static GamePad gamepad;
 	
@@ -38,8 +42,10 @@ public class Robot extends IterativeRobot {
 		driveSubsystem = new DriveSubsystem();
 		bootySubsystem = new BootySubsystem();
 		intakeSubsystem = new IntakeSubsystem();
+		tokyoSubsystem = new TokyoSubsystem();
 		
 		gamepad = new GamePad(0);
+		
 		
 		tempStick = new Joystick(1);
 		
