@@ -11,7 +11,7 @@ public class IntakeCommand extends Command {
     public IntakeCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.intakeSubsystem);
+    	//requires(Robot.intakeSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -21,8 +21,8 @@ public class IntakeCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double speed = Robot.tempStick.getY();
-    	Robot.intakeSubsystem.leftIntake.set(speed);
-    	Robot.intakeSubsystem.leftIntake.set(speed);
+    	//Robot.intakeSubsystem.leftIntake.set(speed);
+    	//Robot.intakeSubsystem.leftIntake.set(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

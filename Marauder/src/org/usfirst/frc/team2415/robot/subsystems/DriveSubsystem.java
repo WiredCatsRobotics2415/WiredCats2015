@@ -39,16 +39,16 @@ public class DriveSubsystem extends Subsystem {
 		left = new Talon(RobotMap.LEFT_TALON);
 		right = new Talon(RobotMap.RIGHT_TALON);
 		middle = new Talon(RobotMap.MIDDLE_TALON);
-		
+		/*
 		leftEncoder = new Encoder(RobotMap.LEFT_ENCODER[0], RobotMap.LEFT_ENCODER[1]);
 		rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER[0], RobotMap.RIGHT_ENCODER[1]);
 		middleEncoder = new Encoder(RobotMap.MIDDLE_ENCODER[0], RobotMap.MIDDLE_ENCODER[1]);
-		
+		*/
 		gyro = new Gyro(RobotMap.GYRO);
-		gyro.setSensitivity(GYRO_SENSITIVITY);	//in measurement of Volts/degree/second
+		//gyro.setSensitivity(GYRO_SENSITIVITY);	//in measurement of Volts/degree/second
 		
 		resetGyro();
-		resetEncoders();
+		//resetEncoders();
 	}
 
     public void initDefaultCommand() {
@@ -76,8 +76,8 @@ public class DriveSubsystem extends Subsystem {
     public float getDistance(){
     	//returns distance traveled in feet
     	return (float)Math.max(left.getDistance(), right.getDistance());
-    }
-    */
+    }*/
+    
     public double getAngle(){
     	return gyro.getAngle();
     }

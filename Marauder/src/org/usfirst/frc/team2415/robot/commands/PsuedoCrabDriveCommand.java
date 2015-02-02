@@ -70,10 +70,10 @@ public class PsuedoCrabDriveCommand extends Command {
     	double angularVelocity = Robot.driveSubsystem.pid.pidOutput(
     			Robot.driveSubsystem.getAngle(), newDesiredAngle);
     	
-    	double left = leftY*(Math.abs(leftY) - Math.abs(angularVelocity/2)) + angularVelocity/2;
-    	double right = leftY*(Math.abs(leftY) - Math.abs(angularVelocity/2)) - angularVelocity/2;
+    	double left = Math.signum(leftY)*(Math.abs(leftY) - Math.abs(angularVelocity/2)) + angularVelocity/2;
+    	double right = Math.signum(leftY)*(Math.abs(leftY) - Math.abs(angularVelocity/2)) - angularVelocity/2;
     	
-    	Robot.driveSubsystem.setMotors(left, right, leftX);
+    	Robot.driveSubsystem.setMotors(left, -right, -leftX);
     }
 
     // Make this return true when this Command no longer needs to run execute()
