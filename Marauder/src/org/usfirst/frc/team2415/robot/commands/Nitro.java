@@ -7,7 +7,7 @@ public class Nitro extends Command {
 	@Override
 	protected void initialize() {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
