@@ -1,8 +1,6 @@
 package org.usfirst.frc.team2415.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import org.usfirst.frc.team2415.robot.subsystems.BootySubsystem;
-import org.usfirst.frc.team2415.robot.Robot;
 
 /**
  *

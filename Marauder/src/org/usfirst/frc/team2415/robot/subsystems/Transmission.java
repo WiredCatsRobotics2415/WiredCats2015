@@ -13,7 +13,7 @@ public class Transmission {
 	public Transmission(int[] talons, int[] encoder){
 		talon1 = new Talon(talons[0]);
 		talon2 = new Talon(talons[1]);
-		//this.encoder = new Encoder(encoder[0], encoder[1]);
+		this.encoder = new Encoder(encoder[0], encoder[1]);
 	}
 	
 	public void set(double value){
