@@ -23,7 +23,7 @@ public class RobotMap {
 	public static final int RIGHT_TALON = 4;
 	public static final int MIDDLE_TALON = 3;
 	
-	public static final int[] INTAKE_TALONS = {0,0};
+	public static final int[] INTAKE_TALONS = {0,1};
 	
 	public static final int[] LEFT_ENCODER = {0,0};
 	public static final int[] RIGHT_ENCODER = {0,0};
