@@ -25,7 +25,7 @@ public class Robot extends IterativeRobot {
 	
 	public static DriveSubsystem driveSubsystem;
 	public static BootySubsystem bootySubsystem;
-	public static IntakeSubsystem intakeSubsystem;
+	public static MichaelJacksonSubsystem mjSubsystem;
 	public static TokyoSubsystem tokyoSubsystem;
 	
 	public static GamePad gamepad;
@@ -41,7 +41,7 @@ public class Robot extends IterativeRobot {
 		
 		driveSubsystem = new DriveSubsystem();
 		bootySubsystem = new BootySubsystem();
-		intakeSubsystem = new IntakeSubsystem();
+		mjSubsystem = new MichaelJacksonSubsystem();
 		tokyoSubsystem = new TokyoSubsystem();
 		
 		gamepad = new GamePad(0);
