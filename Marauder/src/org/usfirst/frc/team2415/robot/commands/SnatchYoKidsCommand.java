@@ -6,12 +6,12 @@ import org.usfirst.frc.team2415.robot.Robot;
 /**
  *
  */
-public class IntakeCommand extends Command {
+public class SnatchYoKidsCommand extends Command {
 
-    public IntakeCommand() {
+    public SnatchYoKidsCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.intakeSubsystem);
+    	requires(Robot.mjSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -21,8 +21,8 @@ public class IntakeCommand extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double speed = Robot.tempStick.getY();
-    	Robot.intakeSubsystem.leftIntake.set(speed);
-    	Robot.intakeSubsystem.leftIntake.set(speed);
+    	Robot.mjSubsystem.leftIntake.set(speed);
+    	Robot.mjSubsystem.leftIntake.set(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
