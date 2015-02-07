@@ -21,8 +21,8 @@ public class BootySubsystem extends Subsystem {
 	private DoubleSolenoid rightCheek;
 	
 	public BootySubsystem(){
-		leftCheek = new DoubleSolenoid(RobotMap.LEFT_CHEEK1, RobotMap.LEFT_CHEEK2);
-		rightCheek = new DoubleSolenoid(RobotMap.RIGHT_CHEEK1, RobotMap.RIGHT_CHEEK2);
+		leftCheek = new DoubleSolenoid(RobotMap.LEFT_CHEEK[0], RobotMap.LEFT_CHEEK[1]);
+		rightCheek = new DoubleSolenoid(RobotMap.RIGHT_CHEEK[0], RobotMap.RIGHT_CHEEK[1]);
 	}
 	
 	
@@ -35,11 +35,14 @@ public class BootySubsystem extends Subsystem {
 		
 	}
 	
-	public void setCheeks(Object leftCheek, Object rightCheek){
-		if(!(leftCheek instanceof DoubleSolenoid.Value) || !(rightCheek instanceof DoubleSolenoid.Value)) return;
-		
-		this.leftCheek.set((DoubleSolenoid.Value)leftCheek);
-		this.rightCheek.set((DoubleSolenoid.Value)rightCheek);
+	public void clench(){
+		leftCheek.set((DoubleSolenoid.Value)CLENCH);
+		rightCheek.set((DoubleSolenoid.Value)CLENCH);
+	}
+	
+	public void unclench(){
+		leftCheek.set((DoubleSolenoid.Value)UNCLENCH);
+		rightCheek.set((DoubleSolenoid.Value)UNCLENCH);	
 	}
 	
 

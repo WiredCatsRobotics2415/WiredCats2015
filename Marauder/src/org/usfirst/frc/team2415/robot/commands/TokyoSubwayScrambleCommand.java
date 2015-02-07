@@ -9,7 +9,7 @@ public class TokyoSubwayScrambleCommand extends Command {
 	
 	I2C i2c;
 	int registerAddress = 4;
-	int data = 1;
+	int data;
 	
 	@Override
 	protected void initialize() {

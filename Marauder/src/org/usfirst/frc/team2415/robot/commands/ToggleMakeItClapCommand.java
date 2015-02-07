@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2415.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team2415.robot.Robot;
 
 /**
  *
@@ -9,19 +10,13 @@ public class ToggleMakeItClapCommand extends Command {
 
     public ToggleMakeItClapCommand() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	//requires(Robot.bootySubsystem);
+    	requires(Robot.bootySubsystem);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	//Object[] bootyStatus = Robot.bootySubsystem.getCheeks();
-    	
-    	//if(bootyStatus[0] == Robot.bootySubsystem.CLENCH){
-    		//Robot.bootySubsystem.setCheeks(Robot.bootySubsystem.UNCLENCH, Robot.bootySubsystem.UNCLENCH);
-    	//}else{
-    		//Robot.bootySubsystem.setCheeks(Robot.bootySubsystem.CLENCH, Robot.bootySubsystem.CLENCH);
-    	//}
+    	if(Robot.bootySubsystem.getCheeks()[0] == Robot.bootySubsystem.CLENCH) Robot.bootySubsystem.unclench();
+    	else Robot.bootySubsystem.SSclench();
     	
     }
 
