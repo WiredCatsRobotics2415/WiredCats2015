@@ -1,28 +1,27 @@
 package org.usfirst.frc.team2415.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
 import org.usfirst.frc.team2415.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class SnatchYoKidsCommand extends Command {
+public class ToggleClaspCommand extends Command {
 
-    public SnatchYoKidsCommand() {
+    public ToggleClaspCommand() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    	requires(Robot.mjSubsystem);
+        requires(Robot.mjSubsystem);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
+    	if(Robot.mjSubsystem.getArms()[0] == Robot.mjSubsystem.RELEASE) Robot.mjSubsystem.embrace();
+    	else Robot.mjSubsystem.release();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double speed = Robot.tempStick.getY();
-    	Robot.mjSubsystem.leftIntake.set(speed);
-    	Robot.mjSubsystem.leftIntake.set(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
