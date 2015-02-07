@@ -40,14 +40,14 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
 		driveSubsystem = new DriveSubsystem();
-		bootySubsystem = new BootySubsystem();
-		mjSubsystem = new MichaelJacksonSubsystem();
-		tokyoSubsystem = new TokyoSubsystem();
+		//bootySubsystem = new BootySubsystem();
+		//mjSubsystem = new MichaelJacksonSubsystem();
+		//tokyoSubsystem = new TokyoSubsystem();
 		
 		gamepad = new GamePad(0);
 		
 		
-		tempStick = new Joystick(1);
+		//tempStick = new Joystick(1);
 		
 		gamepad.a_button.whenPressed(new ToggleMakeItClapCommand());
 		
