@@ -3,7 +3,7 @@ package org.usfirst.frc.team2415.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import org.usfirst.frc.team2415.robot.RobotMap;
-import org.usfirst.frc.team2415.robot.commands.ToggleMakeItClapCommand;
+import org.usfirst.frc.team2415.robot.commands.booty.ToggleMakeItClapCommand;
 
 
 /**

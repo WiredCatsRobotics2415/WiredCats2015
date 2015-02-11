@@ -11,14 +11,11 @@ public class PsuedoCrabDriveCommand extends Command {
 	
 	private final float DEADBAND = 0;
 	private final float INTERPOLATION_FACTOR = 0;
-	
-	private long lastTime, now;
 
     public PsuedoCrabDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveSubsystem);
-    	lastTime = System.currentTimeMillis();
     }
 
     // Called just before this Command runs the first time
@@ -28,26 +25,19 @@ public class PsuedoCrabDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	now = System.currentTimeMillis();
-    	long time = (now - lastTime)/1000;
-    	lastTime = now;
-    	
     	double leftY = Robot.gamepad.leftY();
     	double rightX = Robot.gamepad.rightX();
     	
-    	double turnSpeed = rightX*Robot.driveSubsystem.maxTurnRate;
-    	double addAngle = turnSpeed*time;
-    	double newDesiredAngle = addAngle + Robot.driveSubsystem.pid.getDesired();
-    	double angularVelocity = Robot.driveSubsystem.pid.pidOutput(
-    			Robot.driveSubsystem.getAngle(), newDesiredAngle);
+    	if(Math.abs(leftY) < DEADBAND) leftY = 0;
+    	if(Math.abs(rightX) < DEADBAND) rightX = 0;
     	
-    	double left = leftY*(Math.abs(leftY) - Math.abs(angularVelocity/2)) + angularVelocity/2;
-    	double right = leftY*(Math.abs(leftY) - Math.abs(angularVelocity/2)) - angularVelocity/2;
+    	leftY = INTERPOLATION_FACTOR*Math.pow(leftY, 3) + (1 - INTERPOLATION_FACTOR)*leftY;
+    	rightX = INTERPOLATION_FACTOR*Math.pow(rightX, 3) + (1 - INTERPOLATION_FACTOR)*rightX;
     	
-    	Robot.driveSubsystem.setMotors(left, right);
+    	double left = leftY + rightX;
+    	double right = leftY - rightX;
     	
-    	System.out.println("Current Angle, current rate: " + Robot.driveSubsystem.getAngle() + ", " + 
-    														 Robot.driveSubsystem.getRate());
+    	Robot.driveSubsystem.setMotors(left, -right);
     }
 
     // Make this return true when this Command no longer needs to run execute()
