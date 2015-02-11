@@ -21,13 +21,18 @@ public class RobotMap {
 	
 	public static final int LEFT_TALON = 2;
 	public static final int RIGHT_TALON = 4;
-	public static final int MIDDLE_TALON = 3;
 	
 	public static final int[] MJ_TALONS = {0,0};
 	
+	public static final int[] ELEVATOR_CAN_TALONS = {0,0};
+	
 	public static final int[] LEFT_ENCODER = {0,0};
 	public static final int[] RIGHT_ENCODER = {0,0};
-	public static final int[] MIDDLE_ENCODER = {0,0};
+	
+	public static final int[] ELEVATOR_ENCODER_1 = {0,0};
+	public static final int[] ELEVATOR_ENCODER_2 = {0,0};
+	
+	public static final int[] ELEVATOR_BREAK_SOLENOID = {0,0};
 	
 	public static final int[] LEFT_CHEEK = {0,0};
 	public static final int[] RIGHT_CHEEK = {0,0};

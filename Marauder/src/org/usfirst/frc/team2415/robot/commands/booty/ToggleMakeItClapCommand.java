@@ -1,23 +1,23 @@
-package org.usfirst.frc.team2415.robot.commands;
-
-import org.usfirst.frc.team2415.robot.Robot;
+package org.usfirst.frc.team2415.robot.commands.booty;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.usfirst.frc.team2415.robot.Robot;
 
 /**
  *
  */
-public class ToggleClaspCommand extends Command {
+public class ToggleMakeItClapCommand extends Command {
 
-    public ToggleClaspCommand() {
+    public ToggleMakeItClapCommand() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.mjSubsystem);
+    	requires(Robot.bootySubsystem);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Robot.mjSubsystem.getArms()[0] == Robot.mjSubsystem.RELEASE) Robot.mjSubsystem.embrace();
-    	else Robot.mjSubsystem.release();
+    	if(Robot.bootySubsystem.getCheeks()[0] == Robot.bootySubsystem.CLENCH) Robot.bootySubsystem.unclench();
+    	else Robot.bootySubsystem.clench();
+    	
     }
 
     // Called repeatedly when this Command is scheduled to run

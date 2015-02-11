@@ -6,7 +6,6 @@ import org.usfirst.frc.team2415.robot.commands.PsuedoCrabDriveCommand;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Encoder;
 
 /**
  *
