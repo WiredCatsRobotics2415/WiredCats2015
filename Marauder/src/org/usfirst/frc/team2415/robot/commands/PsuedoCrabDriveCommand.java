@@ -25,24 +25,19 @@ public class PsuedoCrabDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double leftX = Robot.gamepad.leftX();
     	double leftY = Robot.gamepad.leftY();
-
-    	double rightX = Robot.gamepad.leftX();
+    	double rightX = Robot.gamepad.rightX();
     	
-    	if(leftY < DEADBAND) leftY = 0;
-    	if(leftX < DEADBAND) leftX = 0;
-    	if(rightX < DEADBAND) rightX = 0;
+    	if(Math.abs(leftY) < DEADBAND) leftY = 0;
+    	if(Math.abs(rightX) < DEADBAND) rightX = 0;
     	
-    	leftX = Math.pow(leftX, 3)*INTERPOLATION_FACTOR + leftX*(1-INTERPOLATION_FACTOR);
-    	leftY = Math.pow(leftY, 3)*INTERPOLATION_FACTOR + leftY*(1-INTERPOLATION_FACTOR);
-    	rightX = Math.pow(rightX, 3)*INTERPOLATION_FACTOR + rightX*(1-INTERPOLATION_FACTOR);
+    	leftY = INTERPOLATION_FACTOR*Math.pow(leftY, 3) + (1 - INTERPOLATION_FACTOR)*leftY;
+    	rightX = INTERPOLATION_FACTOR*Math.pow(rightX, 3) + (1 - INTERPOLATION_FACTOR)*rightX;
     	
     	double left = leftY + rightX;
     	double right = leftY - rightX;
-    	double middle = leftX;
     	
-    	Robot.driveSubsystem.setMotors(left, right, middle);
+    	Robot.driveSubsystem.setMotors(left, -right);
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -15,24 +15,27 @@ public class RobotMap {
     // number and the module. For example you with a rangefinder:
     // public static int rangefinderPort = 1;
     // public static int rangefinderModule = 1;
-	public static final int TALON_LEFT = 0;
-	public static final int TALON_RIGHT = 0;
 	
-	public static final int TALON_LEFT_1 = 0;
-	public static final int TALON_LEFT_2 = 0;
-	public static final int TALON_RIGHT_1 = 0;
-	public static final int TALON_RIGHT_2 = 0;
-	public static final int TALON_MIDDLE_1 = 0;
-	public static final int TALON_MIDDLE_2 = 0;
 	
-	public static final int LEFT_ENCODER_A = 0;
-	public static final int LEFT_ENCODER_B = 0;
-	public static final int RIGHT_ENCODER_A = 0;
-	public static final int RIGHT_ENCODER_B = 0;
+	//TODO: Set correct port values once systems are finished!
 	
-	public static final int LEFT_CHEEK1 = 0;
-	public static final int LEFT_CHEEK2 = 0;
-	public static final int RIGHT_CHEEK1 = 0;
-	public static final int RIGHT_CHEEK2 = 0;
-	public static final int BOOTYMODNUM = 0;  // not sure if we need more modules so yeah
+	public static final int LEFT_TALON = 2;
+	public static final int RIGHT_TALON = 4;
+	
+	public static final int[] MJ_TALONS = {0,0};
+	
+	public static final int[] ELEVATOR_CAN_TALONS = {0,0};
+	
+	public static final int[] LEFT_ENCODER = {0,0};
+	public static final int[] RIGHT_ENCODER = {0,0};
+	
+	public static final int[] ELEVATOR_ENCODER_1 = {0,0};
+	public static final int[] ELEVATOR_ENCODER_2 = {0,0};
+	
+	public static final int[] ELEVATOR_BREAK_SOLENOID = {0,0};
+	
+	public static final int[] LEFT_CHEEK = {0,0};
+	public static final int[] RIGHT_CHEEK = {0,0};
+	
+	public static final int GYRO = 0;
 }
