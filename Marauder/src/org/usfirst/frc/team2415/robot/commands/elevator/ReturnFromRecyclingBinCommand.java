@@ -1,18 +1,17 @@
-
-package org.usfirst.frc.team2415.robot.commands;
-
-import edu.wpi.first.wpilibj.command.Command;
+package org.usfirst.frc.team2415.robot.commands.elevator;
 
 import org.usfirst.frc.team2415.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ExampleCommand extends Command {
+public class ReturnFromRecyclingBinCommand extends Command {
 
-    public ExampleCommand() {
+    public ReturnFromRecyclingBinCommand() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.exampleSubsystem);
+        requires(Robot.elevatorSubsystem);
     }
 
     // Called just before this Command runs the first time
