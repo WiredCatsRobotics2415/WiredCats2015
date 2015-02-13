@@ -39,7 +39,10 @@ public class ElevatorSubsystem extends Subsystem {
     public void upTote(){}
 
     //moves elevator up to elevation required to stack recycling bin
-    public void upRecycleBin(){}
+    public void upRecycleBin(){
+    	talon1.set(1);
+    	talon2.set(1);
+    }
 
     //moves elevator down from tote elevation
     public void downFromTote(){}
