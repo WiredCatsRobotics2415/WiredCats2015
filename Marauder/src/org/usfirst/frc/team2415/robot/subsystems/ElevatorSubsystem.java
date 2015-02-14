@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Counter;
 
 /**
  *
@@ -19,6 +20,8 @@ public class ElevatorSubsystem extends Subsystem {
 	
 	private CANTalon talon1, talon2;
 	
+	private Counter toteHall, binHall;
+	
 	private DoubleSolenoid elevatorBreak;
 
 	public ElevatorSubsystem(){
@@ -27,6 +30,15 @@ public class ElevatorSubsystem extends Subsystem {
 		
 		encoder1 = new Encoder(RobotMap.ELEVATOR_ENCODER_1[0], RobotMap.ELEVATOR_ENCODER_1[1]);
 		encoder2 = new Encoder(RobotMap.ELEVATOR_ENCODER_2[0], RobotMap.ELEVATOR_ENCODER_2[1]);
+		
+		toteHall = new Counter();
+		binHall = new Counter();
+		
+		toteHall.setUpSource(RobotMap.EVELATOR_HALL_EFFECTS[0]);
+		toteHall.setUpDownCounterMode();
+		
+		binHall.setUpSource(RobotMap.EVELATOR_HALL_EFFECTS[1]);
+		binHall.setUpDownCounterMode();
 		
 		elevatorBreak = new DoubleSolenoid(RobotMap.ELEVATOR_BREAK_SOLENOID[0], RobotMap.ELEVATOR_BREAK_SOLENOID[1]);
 	}
@@ -39,7 +51,7 @@ public class ElevatorSubsystem extends Subsystem {
     public void upTote(){}
 
     //moves elevator up to elevation required to stack recycling bin
-    public void upRecycleBin(){
+    public void upBin(){
     	talon1.set(1);
     	talon2.set(1);
     }
@@ -48,6 +60,6 @@ public class ElevatorSubsystem extends Subsystem {
     public void downFromTote(){}
 
     //moves elevator down from recycling bin elevation
-    public void downFromRecycleBin(){}
+    public void downFromBin(){}
 }
 

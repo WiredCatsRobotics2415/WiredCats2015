@@ -24,10 +24,12 @@ public class RobotMap {
 	
 	public static final int[] MJ_TALONS = {0,0};
 	
-	public static final int[] ELEVATOR_CAN_TALONS = {0,0};
+	public static final int[] ELEVATOR_CAN_TALONS = {0,0};		//CAN module
 	
 	public static final int[] LEFT_ENCODER = {0,0};
 	public static final int[] RIGHT_ENCODER = {0,0};
+	
+	public static final int[] EVELATOR_HALL_EFFECTS = {0,0};	//DIO ports
 	
 	public static final int[] ELEVATOR_ENCODER_1 = {0,0};
 	public static final int[] ELEVATOR_ENCODER_2 = {0,0};
