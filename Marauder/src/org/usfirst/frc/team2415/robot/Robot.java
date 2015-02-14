@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2415.robot;
 
 import org.usfirst.frc.team2415.robot.commands.*;
+import org.usfirst.frc.team2415.robot.commands.elevator.ElevateRecycleBinCommand;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -41,17 +42,17 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 		
 		driveSubsystem = new DriveSubsystem();
-		bootySubsystem = new BootySubsystem();
-		mjSubsystem = new MichaelJacksonSubsystem();
-		tokyoSubsystem = new TokyoSubsystem();
-		elevatorSubsystem = new ElevatorSubsystem()
+		//bootySubsystem = new BootySubsystem();
+		//mjSubsystem = new MichaelJacksonSubsystem();
+		//tokyoSubsystem = new TokyoSubsystem();
+		elevatorSubsystem = new ElevatorSubsystem();
 		
 		gamepad = new GamePad(0);
 		
 		
 		//tempStick = new Joystick(1);
 		
-		gamepad.a_button.whenPressed(new ToggleMakeItClapCommand());
+		gamepad.a_button.whenPressed(new ElevateRecycleBinCommand());
 		
         // instantiate the command used for the autonomous period
     }
