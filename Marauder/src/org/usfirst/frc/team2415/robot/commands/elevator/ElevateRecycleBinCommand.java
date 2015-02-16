@@ -26,6 +26,7 @@ public class ElevateRecycleBinCommand extends Command {
     	 * 
     	 * */
     	Robot.elevatorSubsystem.up(Robot.tempStick.getY());
+    	if(Robot.elevatorSubsystem.getEleHall()) Robot.elevatorSubsystem.resetEncoder();
     }
 
     // Make this return true when this Command no longer needs to run execute()

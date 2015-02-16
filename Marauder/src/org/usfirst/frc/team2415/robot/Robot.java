@@ -108,8 +108,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        System.out.println(driveSubsystem.getLeftEncoder() + ", " + driveSubsystem.getRightEncoder() + ", " +
-        					elevatorSubsystem.getHeight());
+        //System.out.println(driveSubsystem.getLeftEncoder() + ", " + driveSubsystem.getRightEncoder() + ", " + elevatorSubsystem.getHeight());
+        System.out.println(elevatorSubsystem.getEleHall());
     }
     
     /**

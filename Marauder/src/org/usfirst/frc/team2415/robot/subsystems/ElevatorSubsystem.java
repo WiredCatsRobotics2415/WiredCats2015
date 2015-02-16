@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.Counter;
+import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  *	Subsystem for all controllers and sensors used to control and monitor the elevator.
@@ -23,7 +23,7 @@ public class ElevatorSubsystem extends Subsystem {
 	
 	private CANTalon talon1, talon2;
 	
-	private Counter eleHall;
+	private DigitalInput eleHall;
 	
 	private DoubleSolenoid toteNoid;
 	
@@ -35,10 +35,7 @@ public class ElevatorSubsystem extends Subsystem {
 		
 		encoder = new Encoder(RobotMap.ELEVATOR_ENCODER[0], RobotMap.ELEVATOR_ENCODER[1]);
 		
-		//eleHall = new Counter();
-		
-		//eleHall.setUpSource(RobotMap.EVELATOR_HALL_EFFECT);
-		//eleHall.setUpDownCounterMode();
+		eleHall = new DigitalInput(RobotMap.EVELATOR_HALL_EFFECT);
 		
 		//elevatorBreak = new DoubleSolenoid(RobotMap.ELEVATOR_BREAK_SOLENOID[0], RobotMap.ELEVATOR_BREAK_SOLENOID[1]);
 		//toteNoid = new DoubleSolenoid(RobotMap.ELEVATOR_PUSH_SOLENOID[0], RobotMap.ELEVATOR_PUSH_SOLENOID[1]);}
@@ -66,13 +63,13 @@ public class ElevatorSubsystem extends Subsystem {
     /**Returns count of the elevator hall effect sensor
      * @return <b>int</b> ticks counted each time the <br> elevator passes the height of the <br>
      * tote.*/
-    public int getEleHall(){
+    public boolean getEleHall(){
     	return eleHall.get();
     }
     
     /**Resets the count of the elevator hall effect sensor.*/
     public void resetHall(){
-    	eleHall.reset();
+    	//eleHall.reset();
     }
     
     /**Stops the movement of the elevator.*/

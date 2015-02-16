@@ -66,7 +66,7 @@ public class MichaelJacksonSubsystem extends Subsystem {
     }
     
     public boolean getLimitSwitch(){
-    	return limitSwitch.get();
+    	return !limitSwitch.get();
     }
 }
 
