@@ -34,8 +34,8 @@ public class PsuedoCrabDriveCommand extends Command {
     	leftY = INTERPOLATION_FACTOR*Math.pow(leftY, 3) + (1 - INTERPOLATION_FACTOR)*leftY;
     	rightX = INTERPOLATION_FACTOR*Math.pow(rightX, 3) + (1 - INTERPOLATION_FACTOR)*rightX;
     	
-    	double left = leftY + rightX;
-    	double right = leftY - rightX;
+    	double left = leftY - rightX;
+    	double right = leftY + rightX;
     	
     	Robot.driveSubsystem.setMotors(left, -right);
     }

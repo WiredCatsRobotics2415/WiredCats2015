@@ -22,10 +22,13 @@ public class SnatchCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	Robot.mjSubsystem.snatch(1);
+    	System.out.println(Robot.mjSubsystem.getLimitSwitch());
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
+    	System.out.println(Robot.mjSubsystem.getLimitSwitch());
         return false;
     }
 

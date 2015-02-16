@@ -2,7 +2,8 @@ package org.usfirst.frc.team2415.robot;
 
 public class PID {
 	
-	private double desired = 0;
+	private double currDesired = 0;
+	private double prevDesired;
 	
 	private float kP, kI, kD;
 	
@@ -11,18 +12,16 @@ public class PID {
 	}
 	
 	private double potential(double current, double desired){
-		double error = desired-current;
-		if (error > 180) error = 180;
-		if (error < -180) error = -180;
-		return kP*error;
+		return kP*(desired-current);
 	}
 	
 	public double getDesired(){
-		return desired;
+		return currDesired;
 	}
 	
 	public double pidOutput(double current, double desired){
-		this.desired = desired;
+		prevDesired = currDesired;
+		currDesired = desired;
 		return potential(current, desired);
 	}
 }
