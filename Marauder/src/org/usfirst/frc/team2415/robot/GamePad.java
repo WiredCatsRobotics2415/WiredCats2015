@@ -4,6 +4,7 @@
  */
 package org.usfirst.frc.team2415.robot;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
@@ -21,6 +22,8 @@ public class GamePad extends Joystick{
     
     public JoystickButton rightBumper;
     public JoystickButton leftBumper;
+    public Trigger leftTrigger;
+    public Trigger rightTrigger;
     
     public GamePad(int port){
         super(port);
@@ -31,6 +34,9 @@ public class GamePad extends Joystick{
         
         rightBumper = new JoystickButton(this, 6);
         leftBumper = new JoystickButton(this, 5);
+        
+        leftTrigger = new Trigger(this, 2);
+        rightTrigger = new Trigger(this, 3);
     }
     
     public double leftY(){
@@ -48,12 +54,29 @@ public class GamePad extends Joystick{
     public double rightX(){
         return this.getRawAxis(4);
     }
-    
+    /*
     public boolean leftTrigger(){
-        return this.getRawAxis(3) > 0.75;
+        return this.getRawAxis(2) > 0.75;
     }
     
     public boolean rightTrigger(){
-        return this.getRawAxis(3) < -0.75;
+        return this.getRawAxis(3) > 0.75;
+    }
+    */
+    public class Trigger extends JoystickButton{
+    	
+    	private GenericHID joystick;
+    	private int triggerNumber;
+    	
+		public Trigger(GenericHID joystick, int triggerNumber) {
+			super(joystick, triggerNumber);
+			this.joystick = joystick;
+			this.triggerNumber = triggerNumber;
+		}
+		
+		public boolean get(){
+			return joystick.getRawAxis(triggerNumber) > 0.75;
+		}
+    	
     }
 }

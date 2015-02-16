@@ -17,7 +17,7 @@ public class ElevatorSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private final float TICKS_PER_INCH = 0;
+	private final int TICKS_PER_INCH = 285;
 			
 	private Encoder encoder;
 	
@@ -40,8 +40,9 @@ public class ElevatorSubsystem extends Subsystem {
 		//eleHall.setUpSource(RobotMap.EVELATOR_HALL_EFFECT);
 		//eleHall.setUpDownCounterMode();
 		
-		elevatorBreak = new DoubleSolenoid(RobotMap.ELEVATOR_BREAK_SOLENOID[0], RobotMap.ELEVATOR_BREAK_SOLENOID[1]);
-		toteNoid = new DoubleSolenoid(RobotMap.ELEVATOR_PUSH_SOLENOID[0], RobotMap.ELEVATOR_PUSH_SOLENOID[1]);}
+		//elevatorBreak = new DoubleSolenoid(RobotMap.ELEVATOR_BREAK_SOLENOID[0], RobotMap.ELEVATOR_BREAK_SOLENOID[1]);
+		//toteNoid = new DoubleSolenoid(RobotMap.ELEVATOR_PUSH_SOLENOID[0], RobotMap.ELEVATOR_PUSH_SOLENOID[1]);}
+	}
 	
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
@@ -50,7 +51,7 @@ public class ElevatorSubsystem extends Subsystem {
     
     /**Moves elevator up.*/
     public void up(double speed){
-    	elevatorBreak.set(DoubleSolenoid.Value.kReverse);
+    	//elevatorBreak.set(DoubleSolenoid.Value.kReverse);
     	talon1.set(speed);
     	talon2.set(speed);
     }

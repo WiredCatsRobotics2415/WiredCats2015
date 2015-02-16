@@ -62,7 +62,9 @@ public class Robot extends IterativeRobot {
 		tempStick = new Joystick(1);
 		
 		gamepad = new GamePad(0);
-		gamepad.a_button.whenPressed(new SnatchCommand());
+		gamepad.a_button.whileHeld(new SnatchCommand());
+		gamepad.b_button.whileHeld(new ReleaseCommand());
+		
 		
         // instantiate the command used for the autonomous period
     }
@@ -89,6 +91,8 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         //if (autonomousCommand != null) autonomousCommand.cancel();
+    	
+    	
     }
 
     /**
@@ -104,6 +108,8 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        System.out.println(driveSubsystem.getLeftEncoder() + ", " + driveSubsystem.getRightEncoder() + ", " +
+        					elevatorSubsystem.getHeight());
     }
     
     /**

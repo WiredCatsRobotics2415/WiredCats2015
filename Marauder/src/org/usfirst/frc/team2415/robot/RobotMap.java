@@ -24,6 +24,8 @@ public class RobotMap {
 	
 	public static final int[] MJ_TALONS = {1,8};
 	
+	public static final int LIMIT_SWITCH = 2;	//DIO port
+	
 	public static final int[] ELEVATOR_CAN_TALONS = {10,11};		//CAN module
 	
 	public static final int[] LEFT_ENCODER = {9,8};

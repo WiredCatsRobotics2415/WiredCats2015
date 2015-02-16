@@ -6,6 +6,7 @@ import org.usfirst.frc.team2415.robot.commands.PsuedoCrabDriveCommand;
 import edu.wpi.first.wpilibj.Gyro;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Encoder;
 
 /**
  *	Subsystem for all controllers and sensors used to control and monitor the drivetrain.
@@ -20,6 +21,8 @@ public class DriveSubsystem extends Subsystem {
 	private final double GYRO_SENSITIVITY = .007;
 	
 	private Talon left, right;
+	
+	private Encoder leftEncoder, rightEncoder;
 	
 	private Gyro gyro;
 
@@ -38,6 +41,9 @@ public class DriveSubsystem extends Subsystem {
 		
 		gyro = new Gyro(RobotMap.GYRO);
 		gyro.setSensitivity(GYRO_SENSITIVITY);	//in measurement of Volts/degree/second
+		
+		leftEncoder = new Encoder(RobotMap.LEFT_ENCODER[0], RobotMap.LEFT_ENCODER[1]);
+		rightEncoder = new Encoder(RobotMap.RIGHT_ENCODER[0], RobotMap.RIGHT_ENCODER[1]);
 		
 		resetGyro();
 	}
@@ -69,6 +75,14 @@ public class DriveSubsystem extends Subsystem {
     /**Resets the gyro to read the robot's current position as 0 degrees.*/
     public void resetGyro(){
     	gyro.reset();
+    }
+    
+    public int getLeftEncoder(){
+    	return leftEncoder.get();
+    }
+    
+    public int getRightEncoder(){
+    	return rightEncoder.get();
     }
     
 }

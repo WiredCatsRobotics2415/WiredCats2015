@@ -3,6 +3,7 @@ package org.usfirst.frc.team2415.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.DigitalInput;
 import org.usfirst.frc.team2415.robot.RobotMap;
 import org.usfirst.frc.team2415.robot.commands.michaelJackson.ToggleClaspCommand;
 
@@ -24,9 +25,13 @@ public class MichaelJacksonSubsystem extends Subsystem {
 	private Talon leftHand, rightHand;
 	private DoubleSolenoid leftArm, rightArm;
 	
+	private DigitalInput limitSwitch;
+	
 	public MichaelJacksonSubsystem(){
 		leftHand = new Talon(RobotMap.MJ_TALONS[0]);
 		rightHand = new Talon(RobotMap.MJ_TALONS[1]);
+		
+		limitSwitch = new DigitalInput(RobotMap.LIMIT_SWITCH);
 		
 		//release();
 	}
@@ -58,6 +63,10 @@ public class MichaelJacksonSubsystem extends Subsystem {
     	arms[1] = rightArm.get();
     	
     	return arms;
+    }
+    
+    public boolean getLimitSwitch(){
+    	return limitSwitch.get();
     }
 }
 
