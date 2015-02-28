@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class ElevateToteCommand extends Command {
 	
-	private final float TOTE_HEIGHT = 0;
+    private final float TOTE_HEIGHT = 0;
 	
     public ElevateToteCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -22,7 +22,8 @@ public class ElevateToteCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.elevatorSubsystem.up(0);
+    	double speed = Robot.elevatorSubsystem.getPidOut(TOTE_HEIGHT);
+    	Robot.elevatorSubsystem.setMotors(speed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
