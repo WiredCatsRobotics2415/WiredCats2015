@@ -1,8 +1,8 @@
 package org.usfirst.frc.team2415.robot.commands.michaelJackson;
 
-import org.usfirst.frc.team2415.robot.Robot;
-
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.usfirst.frc.team2415.robot.Robot;
 
 /**
  *
@@ -16,8 +16,8 @@ public class ToggleClaspCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Robot.mjSubsystem.getArms()[0] == Robot.mjSubsystem.RELEASE) Robot.mjSubsystem.embrace();
-    	else Robot.mjSubsystem.release();
+    	if(Robot.mjSubsystem.isClasping()) Robot.mjSubsystem.unclasp();
+    	else Robot.mjSubsystem.clasp();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -26,7 +26,7 @@ public class ToggleClaspCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

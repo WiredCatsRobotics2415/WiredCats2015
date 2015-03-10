@@ -46,10 +46,10 @@ public class MotionProfile {
 	 * @param current
 	 * @return
 	 */
-	public float power(float current){
+	public float power(float currPos, float currVel){
 		float power = 0;
 		float desVel = 0;
-		error = desired-current;
+		error = desired-currPos;
 		
 		//first part of trapezoid; the line that goes up
 		if (error < .5*totalDistance){
@@ -61,9 +61,7 @@ public class MotionProfile {
 		//now that we've determined the correct velocity 
 		//let's convert that to power
 		
-		float currVel = 9999; //TODO
-		
-		power = (float) pid.pidOutput(currVel, desVel);
+		power = (float) pid.getPIDOutput(currVel, desVel);
 		
 		//set velocity cap. This changes the graphs
 		//shape from triangle to trapezoid.

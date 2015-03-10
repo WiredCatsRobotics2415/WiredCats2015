@@ -23,7 +23,7 @@ public class PID {
 		return kP*(desired-current);
 	}
 	
-	public double getPIDOutPut(double current, double desired){
+	public double getPIDOutput(double current, double desired){
 		return proportional(current, desired);
 	}
 }

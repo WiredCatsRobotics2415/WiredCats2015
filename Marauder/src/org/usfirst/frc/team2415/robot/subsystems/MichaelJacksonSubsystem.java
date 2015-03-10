@@ -2,10 +2,10 @@ package org.usfirst.frc.team2415.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.Solenoid;
+
 import org.usfirst.frc.team2415.robot.RobotMap;
-import org.usfirst.frc.team2415.robot.commands.michaelJackson.ToggleClaspCommand;
+import org.usfirst.frc.team2415.robot.commands.michaelJackson.DefaultMJCommand;
 
 /**
  *	Subsystem for all controllers and sensors used to control and monitor the Michael Jackson system<br>
@@ -16,57 +16,57 @@ public class MichaelJacksonSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	/**Solenoid state of activation for the arms of the Michael Jackson system.*/
-	public final Object EMBRACE = DoubleSolenoid.Value.kForward;
-	
-	/**Solenoid state of deactivation for the arms of the Michael Jackson system.*/
-	public final Object RELEASE = DoubleSolenoid.Value.kReverse;
-	
 	private Talon leftHand, rightHand;
-	private DoubleSolenoid leftArm, rightArm;
+	private Solenoid clasp, unclasp;
+	private boolean clasping;
 	
-	private DigitalInput limitSwitch;
+	private double snatchSpeed;
 	
 	public MichaelJacksonSubsystem(){
 		leftHand = new Talon(RobotMap.MJ_TALONS[0]);
 		rightHand = new Talon(RobotMap.MJ_TALONS[1]);
 		
-		limitSwitch = new DigitalInput(RobotMap.LIMIT_SWITCH);
+		clasp = new Solenoid(RobotMap.CLASP_SOLENOID);
+		unclasp = new Solenoid(RobotMap.UNCLASP_SOLENOID);
 		
-		//release();
+		unclasp();
 	}
 	
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new ToggleClaspCommand());
+        setDefaultCommand(new DefaultMJCommand());
     }
     
     /**Activate the pistons of the intake system to clamp the arms onto */
-    public void embrace(){
-    	leftArm.set((DoubleSolenoid.Value)EMBRACE);
-    	rightArm.set((DoubleSolenoid.Value)EMBRACE);
+    public void clasp(){
+    	clasp.set(true);
+    	unclasp.set(false);
+    	clasping = true;
     }
     
-    public void release(){
-    	leftArm.set((DoubleSolenoid.Value)RELEASE);
-    	rightArm.set((DoubleSolenoid.Value)RELEASE);
+    public void unclasp(){
+    	clasp.set(false);
+    	unclasp.set(true);
+    	clasping = false;
     }
     
-    public void snatch(double speed){
-    	leftHand.set(speed);
-    	rightHand.set(-speed);
+    public void snatch(){
+    	leftHand.set(snatchSpeed);
+    	rightHand.set(-snatchSpeed);
     }
     
-    public Object[] getArms(){
-    	Object[] arms = new Object[2];
-    	arms[0] = leftArm.get();
-    	arms[1] = rightArm.get();
-    	
-    	return arms;
+    public void free(){
+    	leftHand.set(-snatchSpeed);
+    	rightHand.set(snatchSpeed);
     }
     
-    public boolean getLimitSwitch(){
-    	return !limitSwitch.get();
+    public void stop(){
+    	leftHand.set(0);
+    	rightHand.set(0);
     }
+    
+    public boolean isClasping(){
+    	return clasping;
+    }
+    
 }
 
