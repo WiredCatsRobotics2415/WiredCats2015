@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2415.robot.commands.elevator;
+package org.usfirst.frc.team2415.robot.commands.michaelJackson;
 
 import org.usfirst.frc.team2415.robot.Robot;
 
@@ -7,13 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ElevateToteCommand extends Command {
-	
-    private final float TOTE_HEIGHT = 0;
-	
-    public ElevateToteCommand() {
+public class FreeCommand extends Command {
+
+    public FreeCommand() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.elevatorSubsystem);
+        requires(Robot.mjSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -22,24 +20,22 @@ public class ElevateToteCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double speed = Robot.elevatorSubsystem.getPidOut(TOTE_HEIGHT);
-    	Robot.elevatorSubsystem.setMotors(speed);
+    	Robot.mjSubsystem.free();
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(Robot.elevatorSubsystem.getHeight() >= TOTE_HEIGHT) return true;
         return false;
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.elevatorSubsystem.stop();
+    	Robot.mjSubsystem.stop();
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.elevatorSubsystem.stop();
+    	end();
     }
 }

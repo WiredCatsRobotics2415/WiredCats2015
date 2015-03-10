@@ -1,11 +1,7 @@
 
 package org.usfirst.frc.team2415.robot;
 
-import org.usfirst.frc.team2415.robot.commands.autonomous.*;
-import org.usfirst.frc.team2415.robot.commands.booty.*;
-import org.usfirst.frc.team2415.robot.commands.elevator.*;
-import org.usfirst.frc.team2415.robot.commands.michaelJackson.*;
-import org.usfirst.frc.team2415.robot.commands.tokyoLighting.*;
+import org.usfirst.frc.team2415.robot.commands.elevator.ZeroElevatorCommand;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -29,10 +25,11 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	
 	public static DriveSubsystem driveSubsystem;
-	public static BootySubsystem bootySubsystem;
 	public static MichaelJacksonSubsystem mjSubsystem;
 	public static TokyoSubsystem tokyoSubsystem;
 	public static ElevatorSubsystem elevatorSubsystem;
+	
+	private Command zeroElevatorCommand;
 	
 	private Compressor compressor;
 	
@@ -62,8 +59,6 @@ public class Robot extends IterativeRobot {
 		tempStick = new Joystick(1);
 		
 		gamepad = new GamePad(0);
-		gamepad.a_button.whileHeld(new SnatchCommand());
-		gamepad.b_button.whileHeld(new ReleaseCommand());
 		
 		
         // instantiate the command used for the autonomous period
@@ -91,8 +86,7 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         //if (autonomousCommand != null) autonomousCommand.cancel();
-    	
-    	
+		zeroElevatorCommand = new ZeroElevatorCommand();
     }
 
     /**
@@ -108,8 +102,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        //System.out.println(driveSubsystem.getLeftEncoder() + ", " + driveSubsystem.getRightEncoder() + ", " + elevatorSubsystem.getHeight());
-        System.out.println(elevatorSubsystem.getEleHall());
+        
     }
     
     /**
