@@ -51,7 +51,6 @@ public class ElevatorSubsystem extends Subsystem {
     }
     
     public void setMotors(double speed){
-    	//elevatorBreak.set(DoubleSolenoid.Value.kReverse);
     	talon1.set(speed);
     	talon2.set(speed);
     }
