@@ -7,12 +7,12 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class PsuedoCrabDriveCommand extends Command {
+public class ArcadeDriveCommand extends Command {
 	
 	private final float DEADBAND = 0;
 	private final float INTERPOLATION_FACTOR = 0;
 
-    public PsuedoCrabDriveCommand() {
+    public ArcadeDriveCommand() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(Robot.driveSubsystem);

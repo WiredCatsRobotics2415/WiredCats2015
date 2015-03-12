@@ -30,6 +30,8 @@ public class ElevatorSubsystem extends Subsystem {
     
     private int liftHeight = 16, lowerHeight = 7;
     
+    private int currentDesiredHeight;
+    
     public boolean isLifting = false;
 	
     private boolean excitedState, relaxedState;
@@ -41,15 +43,15 @@ public class ElevatorSubsystem extends Subsystem {
     private DigitalInput hallEffect;
 	
     public ElevatorSubsystem(){
-    	lastTime = System.currentTimeMillis();
-    	lastPos = this.getHeight();
-    	
 		talon1 = new CANTalon(RobotMap.ELEVATOR_CAN_TALONS[0]);
 		talon2 = new CANTalon(RobotMap.ELEVATOR_CAN_TALONS[1]);
 		
 		encoder = new Encoder(RobotMap.ELEVATOR_ENCODER[0], RobotMap.ELEVATOR_ENCODER[1]);
 		
 		hallEffect = new DigitalInput(RobotMap.EVELATOR_HALL_EFFECT);
+
+    	lastTime = System.currentTimeMillis();
+    	lastPos = getHeight();
     }
 	
     public void initDefaultCommand() {

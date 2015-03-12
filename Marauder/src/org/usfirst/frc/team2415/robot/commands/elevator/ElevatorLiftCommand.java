@@ -7,9 +7,9 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ToggleElevatorLiftCommand extends Command {
+public class ElevatorLiftCommand extends Command {
 	
-    public ToggleElevatorLiftCommand() {
+    public ElevatorLiftCommand() {
         // Use requires() here to declare subsystem dependencies
         requires(Robot.elevatorSubsystem);
     }
@@ -22,15 +22,9 @@ public class ToggleElevatorLiftCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.elevatorSubsystem.isLifting){
-        	double current = Robot.elevatorSubsystem.getHeight();
-        	double output = Robot.elevatorSubsystem.basicPID.getPIDOutput(current, Robot.elevatorSubsystem.getLiftHeight());
-        	Robot.elevatorSubsystem.setMotors(output);
-    	}else{
-        	double current = Robot.elevatorSubsystem.getHeight();
-        	double output = Robot.elevatorSubsystem.basicPID.getPIDOutput(current, Robot.elevatorSubsystem.getLowerHeight());
-        	Robot.elevatorSubsystem.setMotors(output);
-    	}
+    	double current = Robot.elevatorSubsystem.getHeight();
+    	double output = Robot.elevatorSubsystem.basicPID.getPIDOutput(current, Robot.elevatorSubsystem.getLiftHeight());
+    	Robot.elevatorSubsystem.setMotors(output);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -40,12 +34,10 @@ public class ToggleElevatorLiftCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-    	Robot.elevatorSubsystem.setMotors(0);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.elevatorSubsystem.setMotors(0);
     }
 }

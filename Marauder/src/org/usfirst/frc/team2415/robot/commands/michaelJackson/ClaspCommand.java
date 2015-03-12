@@ -7,13 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class SnatchCommand extends Command {
-	
-	
-	
-    public SnatchCommand() {
+public class ClaspCommand extends Command {
+
+    public ClaspCommand() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.mjSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -22,7 +20,7 @@ public class SnatchCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.mjSubsystem.snatch();
+    	Robot.mjSubsystem.clasp();
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -38,6 +36,6 @@ public class SnatchCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.mjSubsystem.stop();
+    	end();
     }
 }

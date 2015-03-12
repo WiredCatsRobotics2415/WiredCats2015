@@ -1,32 +1,33 @@
-package org.usfirst.frc.team2415.robot.commands.michaelJackson;
-
-import edu.wpi.first.wpilibj.command.Command;
+package org.usfirst.frc.team2415.robot.commands.elevator;
 
 import org.usfirst.frc.team2415.robot.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  *
  */
-public class ToggleClaspCommand extends Command {
+public class ElevatorLowerCommand extends Command {
 
-    public ToggleClaspCommand() {
+    public ElevatorLowerCommand() {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.mjSubsystem);
+        // eg. requires(chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	if(Robot.mjSubsystem.isClasping()) Robot.mjSubsystem.unclasp();
-    	else Robot.mjSubsystem.clasp();
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	double current = Robot.elevatorSubsystem.getHeight();
+    	double output = Robot.elevatorSubsystem.basicPID.getPIDOutput(current, Robot.elevatorSubsystem.getLowerHeight());
+    	Robot.elevatorSubsystem.setMotors(output);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true
