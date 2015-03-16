@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ElevatorLowerCommand extends Command {
-
+	
     public ElevatorLowerCommand() {
         // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
+        requires(Robot.elevatorSubsystem);
     }
 
     // Called just before this Command runs the first time
@@ -22,6 +22,7 @@ public class ElevatorLowerCommand extends Command {
     protected void execute() {
     	double current = Robot.elevatorSubsystem.getHeight();
     	double output = Robot.elevatorSubsystem.basicPID.getPIDOutput(current, Robot.elevatorSubsystem.getLowerHeight());
+    	System.out.println(output + "," + current);
     	Robot.elevatorSubsystem.setMotors(output);
     }
 

@@ -19,14 +19,14 @@ public class MichaelJacksonSubsystem extends Subsystem {
 	private Talon leftHand, rightHand;
 	private Solenoid clasp, unclasp;
 	
-	private double snatchSpeed = 1;
+	private double snatchSpeed = .5;
 	
 	public MichaelJacksonSubsystem(){
 		leftHand = new Talon(RobotMap.MJ_TALONS[0]);
 		rightHand = new Talon(RobotMap.MJ_TALONS[1]);
 		
-		clasp = new Solenoid(RobotMap.CLASP_SOLENOID);
-		unclasp = new Solenoid(RobotMap.UNCLASP_SOLENOID);
+		clasp = new Solenoid(RobotMap.PCM ,RobotMap.CLASP_SOLENOID);
+		unclasp = new Solenoid(RobotMap.PCM, RobotMap.UNCLASP_SOLENOID);
 	}
 	
     public void initDefaultCommand() {

@@ -1,9 +1,11 @@
 
 package org.usfirst.frc.team2415.robot;
 
-import org.usfirst.frc.team2415.robot.commands.elevator.ZeroElevatorCommand;
+import org.usfirst.frc.team2415.robot.commands.autonomous.PeacockAutonomous;
+import org.usfirst.frc.team2415.robot.commands.autonomous.SimpleAutoCommand;
 import org.usfirst.frc.team2415.robot.commands.elevator.*;
 import org.usfirst.frc.team2415.robot.commands.michaelJackson.*;
+import org.usfirst.frc.team2415.robot.commands.upperCarriage.*;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -28,16 +30,18 @@ public class Robot extends IterativeRobot {
 	
 	public static DriveSubsystem driveSubsystem;
 	public static MichaelJacksonSubsystem mjSubsystem;
-	public static TokyoSubsystem tokyoSubsystem;
 	public static ElevatorSubsystem elevatorSubsystem;
+	public static UpperCarriageSubsystem upperCarriageSubsystem;
 	
-	private Command zeroElevatorCommand;
+	public static TokyoSubsystem tokyoSubsystem;
 	
 	private Compressor compressor;
 	
 	public static GamePad gamepad;
 	
-	public static Joystick tempStick;
+	public static WiredCatJoystick operator;
+	
+	public PeacockAutonomous autonomousCommand;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -46,24 +50,25 @@ public class Robot extends IterativeRobot {
     public void robotInit() {
 		oi = new OI();
 		
-		compressor = new Compressor();	//enter compressor port if need be
+		compressor = new Compressor(RobotMap.PCM);	//enter compressor port if need be
 		/*compressor should run automatically (according the api) until specifically told to stop
 		 *It runs on its own separate loop (doesn't specify if that loop is on a different thread
 		 *but there little doubt because of the limitation in hardware - two weak CPU cores)
 		 */
 		
 		driveSubsystem = new DriveSubsystem();
-		//bootySubsystem = new BootySubsystem();
 		mjSubsystem = new MichaelJacksonSubsystem();
-		//tokyoSubsystem = new TokyoSubsystem();
 		elevatorSubsystem = new ElevatorSubsystem();
-		
-		tempStick = new Joystick(1);
+		upperCarriageSubsystem = new UpperCarriageSubsystem();
 		
 		gamepad = new GamePad(0);
+		operator = new WiredCatJoystick(1);
 		
-		//gamepad.a_button.whenPressed(new ElevatorLiftCommand());
-		//gamepad.b_button.whenPressed(new ElevatorLowerCommand());
+		operator.buttons[4].whenPressed(new ElevatorLiftCommand());
+		operator.buttons[5].whenPressed(new ElevatorLowerCommand());
+		operator.buttons[6].whenPressed(new HalfHeightCommand());
+		operator.buttons[7].whenPressed(new ElevatorCapCommand());
+		operator.buttons[3].whenPressed(new TogglePokeCommand());
 		gamepad.leftTrigger.whileHeld(new ClaspCommand());
 		gamepad.rightTrigger.whileHeld(new FreeCommand());
 		gamepad.rightBumper.whileHeld(new SnatchCommand());
@@ -77,7 +82,8 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-        //if (autonomousCommand != null) autonomousCommand.start();
+    	autonomousCommand = new PeacockAutonomous();
+        if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**
@@ -85,6 +91,7 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
+        System.out.println("Drive Encoder: " + driveSubsystem.getDistance());
     }
 
     public void teleopInit() {
@@ -101,15 +108,14 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
     }
-
     /**
      * This function is called periodically during operator control
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        System.out.println(Robot.elevatorSubsystem.getHallEffect());
+        System.out.println(driveSubsystem.getYaw());
+        System.out.println("Drive Encoder: " + driveSubsystem.getDistance());
     }
     
     /**

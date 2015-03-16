@@ -16,14 +16,13 @@ public class ElevatorLiftCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.elevatorSubsystem.setMotors(0);
-    	Robot.elevatorSubsystem.isLifting = !Robot.elevatorSubsystem.isLifting;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	double current = Robot.elevatorSubsystem.getHeight();
     	double output = Robot.elevatorSubsystem.basicPID.getPIDOutput(current, Robot.elevatorSubsystem.getLiftHeight());
+    	System.out.println(output + "," + current);
     	Robot.elevatorSubsystem.setMotors(output);
     }
 
