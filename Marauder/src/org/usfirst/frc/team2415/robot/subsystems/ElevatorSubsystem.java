@@ -18,21 +18,24 @@ public class ElevatorSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     
-    public PID basicPID = new PID(.25f);
+    public PID basicPID = new PID(.8f);
 	
     MotionProfile basicProfile = new MotionProfile(.25f, 1f, .01f);
     
-    //private final int INCH_PER_TICKS = 285;	//for the competition bot
+    //private final float INCH_PER_TICKS = 1/28.5f;	//for the competition bot
     private final float INCH_PER_TICKS = 1/63.9f;	//for the practice bot
     
     private float lastPos;
     private long lastTime;
     
-    private int liftHeight = 16, lowerHeight = 7;
+    private float liftHeight = 10.0f, lowerHeight = .05f, capHeight = 21.3f,
+    			  halfHeight = (lowerHeight + liftHeight) / 4;
+    
+    private int currentDesiredHeight;
     
     public boolean isLifting = false;
 	
-    private boolean excitedState, relaxedState;
+    private boolean lastHallState;
     
     private Encoder encoder;
     
@@ -41,15 +44,15 @@ public class ElevatorSubsystem extends Subsystem {
     private DigitalInput hallEffect;
 	
     public ElevatorSubsystem(){
-    	lastTime = System.currentTimeMillis();
-    	lastPos = this.getHeight();
-    	
 		talon1 = new CANTalon(RobotMap.ELEVATOR_CAN_TALONS[0]);
 		talon2 = new CANTalon(RobotMap.ELEVATOR_CAN_TALONS[1]);
 		
 		encoder = new Encoder(RobotMap.ELEVATOR_ENCODER[0], RobotMap.ELEVATOR_ENCODER[1]);
 		
 		hallEffect = new DigitalInput(RobotMap.EVELATOR_HALL_EFFECT);
+
+    	lastTime = System.currentTimeMillis();
+    	lastPos = getHeight();
     }
 	
     public void initDefaultCommand() {
@@ -58,6 +61,8 @@ public class ElevatorSubsystem extends Subsystem {
     }
     
     public void setMotors(double speed){
+    	if (speed < -0.75) speed = -0.75;
+    	
     	talon1.set(speed);
     	talon2.set(speed);
     }
@@ -93,26 +98,28 @@ public class ElevatorSubsystem extends Subsystem {
     	encoder.reset();
     }
     
-    public void setHallEffectStates(boolean excitedState, boolean relaxedState){
-    	this.excitedState = excitedState;
-    	this.relaxedState = relaxedState;
-    }
-    
-    public boolean getExcitedState(){
-    	return excitedState;
-    }
-    
-    public boolean getRelaxedState(){
-    	return relaxedState;
-    }
-    
-    
-    public int getLiftHeight(){
+    public float getLiftHeight(){
     	return liftHeight;
     }
     
-    public int getLowerHeight(){
+    public float getLowerHeight(){
     	return lowerHeight;
+    }
+    
+    public float getCapHeight(){
+    	return capHeight;
+    }
+    
+    public float getHalfHeight(){
+    	return halfHeight;
+    }
+    
+    public void checkZero(){
+    	boolean currentState = getHallEffect();
+    	if(currentState != lastHallState){
+    		encoder.reset();
+    	}
+    	lastHallState = currentState;
     }
 }
 
