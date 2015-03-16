@@ -2,56 +2,62 @@ package org.usfirst.frc.team2415.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.DoubleSolenoid;
+import edu.wpi.first.wpilibj.Solenoid;
+
 import org.usfirst.frc.team2415.robot.RobotMap;
-import org.usfirst.frc.team2415.robot.commands.michaelJackson.ToggleClaspCommand;
+import org.usfirst.frc.team2415.robot.commands.michaelJackson.DefaultMJCommand;
 
 /**
- *
+ *	Subsystem for all controllers and sensors used to control and monitor the Michael Jackson system<br>
+ *	(aka the intake system).
  */
 public class MichaelJacksonSubsystem extends Subsystem {
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-	public final Object EMBRACE = DoubleSolenoid.Value.kForward;
-	public final Object RELEASE = DoubleSolenoid.Value.kReverse;
 	
 	private Talon leftHand, rightHand;
-	private DoubleSolenoid leftArm, rightArm;
+	private Solenoid clasp, unclasp;
+	
+	private double snatchSpeed = .5;
 	
 	public MichaelJacksonSubsystem(){
 		leftHand = new Talon(RobotMap.MJ_TALONS[0]);
 		rightHand = new Talon(RobotMap.MJ_TALONS[1]);
 		
-		release();
+		clasp = new Solenoid(RobotMap.PCM ,RobotMap.CLASP_SOLENOID);
+		unclasp = new Solenoid(RobotMap.PCM, RobotMap.UNCLASP_SOLENOID);
 	}
 	
     public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        setDefaultCommand(new ToggleClaspCommand());
+        setDefaultCommand(new DefaultMJCommand());
     }
     
-    public void embrace(){
-    	leftArm.set((DoubleSolenoid.Value)EMBRACE);
-    	rightArm.set((DoubleSolenoid.Value)EMBRACE);
+    /**Activate the pistons of the intake system to clamp the arms onto */
+    public void clasp(){
+    	clasp.set(true);
+    	unclasp.set(false);
     }
     
-    public void release(){
-    	leftArm.set((DoubleSolenoid.Value)RELEASE);
-    	rightArm.set((DoubleSolenoid.Value)RELEASE);
+    public void unclasp(){
+    	clasp.set(false);
+    	unclasp.set(true);
     }
     
-    public void snatch(double speed){
-    	leftHand.set(speed);
-    	rightHand.set(-speed);
+    public void snatch(){
+    	leftHand.set(snatchSpeed);
+    	rightHand.set(-snatchSpeed);
     }
     
-    public Object[] getArms(){
-    	Object[] arms = new Object[2];
-    	arms[0] = leftArm.get();
-    	arms[1] = rightArm.get();
-    	
-    	return arms;
+    public void free(){
+    	leftHand.set(-snatchSpeed);
+    	rightHand.set(snatchSpeed);
     }
+    
+    public void stop(){
+    	leftHand.set(0);
+    	rightHand.set(0);
+    }
+    
 }
 

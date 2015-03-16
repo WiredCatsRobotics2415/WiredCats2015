@@ -1,28 +1,29 @@
 package org.usfirst.frc.team2415.robot;
 
 public class PID {
-	
-	private double desired = 0;
+	private double prevDesired;
 	
 	private float kP, kI, kD;
 	
-	public PID(float p){
+	public PID(float p,float i, float d){
 		kP = p;
+		kI = i;
+		kD = d;
 	}
 	
-	private double potential(double current, double desired){
-		double error = desired-current;
-		if (error > 180) error = 180;
-		if (error < -180) error = -180;
-		return kP*error;
+	public PID(float p,float i){
+		this(p, i, 0);
 	}
 	
-	public double getDesired(){
-		return desired;
+	public PID(float p){
+		this(p, 0);
 	}
 	
-	public double pidOutput(double current, double desired){
-		this.desired = desired;
-		return potential(current, desired);
+	private double proportional(double current, double desired){
+		return kP*(desired-current);
+	}
+	
+	public double getPIDOutput(double current, double desired){
+		return proportional(current, desired);
 	}
 }
