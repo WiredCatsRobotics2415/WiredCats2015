@@ -86,6 +86,14 @@ public class DriveSubsystem extends Subsystem {
     	return (float)leftEncoder.getRate()*INCHES_PER_TICK;
     }
     
+    public boolean isGoingForward(){
+    	return getVelocity() > 1.0f;
+    }
+    
+    public boolean isGoingBackwards(){
+//    	return
+    }
+    
     public float getDistance(){
     	int ticks = getLeftEncoder();
     	return INCHES_PER_TICK * ticks;

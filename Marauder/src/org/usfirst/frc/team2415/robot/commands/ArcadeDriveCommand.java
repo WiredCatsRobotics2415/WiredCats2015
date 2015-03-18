@@ -37,6 +37,10 @@ public class ArcadeDriveCommand extends Command {
     	double left = leftY - rightX;
     	double right = leftY + rightX;
     	
+    	//COAST CODE YA BISH
+    	
+    	if (Robot.driveSubsystem.)
+    	
     	Robot.driveSubsystem.setMotors(left, -right);
     }
 
