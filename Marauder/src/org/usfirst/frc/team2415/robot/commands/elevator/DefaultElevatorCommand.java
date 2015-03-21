@@ -20,6 +20,9 @@ public class DefaultElevatorCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	double current = Robot.elevatorSubsystem.getHeight();
+    	double output = Robot.elevatorSubsystem.basicPID.getPIDOutput(current, Robot.elevatorSubsystem.getCurrentDesired());
+    	Robot.elevatorSubsystem.setMotors(output);
     }
 
     // Make this return true when this Command no longer needs to run execute()

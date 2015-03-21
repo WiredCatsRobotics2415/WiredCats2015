@@ -22,7 +22,7 @@ public class SnatchCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.mjSubsystem.snatch();
+    	Robot.mjSubsystem.snatch(Robot.gamepad.leftTrigger(), Robot.gamepad.rightTrigger());
     }
 
     // Make this return true when this Command no longer needs to run execute()

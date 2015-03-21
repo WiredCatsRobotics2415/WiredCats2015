@@ -34,9 +34,6 @@ public class GamePad extends Joystick{
         
         rightBumper = new JoystickButton(this, 6);
         leftBumper = new JoystickButton(this, 5);
-        
-        leftTrigger = new Trigger(this, 2);
-        rightTrigger = new Trigger(this, 3);
     }
     
     public double leftY(){
@@ -54,29 +51,12 @@ public class GamePad extends Joystick{
     public double rightX(){
         return this.getRawAxis(4);
     }
-    /*
-    public boolean leftTrigger(){
-        return this.getRawAxis(2) > 0.75;
+    
+    public double leftTrigger(){
+        return this.getRawAxis(2);
     }
     
-    public boolean rightTrigger(){
-        return this.getRawAxis(3) > 0.75;
-    }
-    */
-    public class Trigger extends JoystickButton{
-    	
-    	private GenericHID joystick;
-    	private int triggerNumber;
-    	
-		public Trigger(GenericHID joystick, int triggerNumber) {
-			super(joystick, triggerNumber);
-			this.joystick = joystick;
-			this.triggerNumber = triggerNumber;
-		}
-		
-		public boolean get(){
-			return joystick.getRawAxis(triggerNumber) > 0.75;
-		}
-    	
+    public double rightTrigger(){
+        return this.getRawAxis(3);
     }
 }

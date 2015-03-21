@@ -1,4 +1,4 @@
-package org.usfirst.frc.team2415.robot.commands.michaelJackson;
+package org.usfirst.frc.team2415.robot.commands.elevator;
 
 import org.usfirst.frc.team2415.robot.Robot;
 
@@ -7,11 +7,16 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class ClaspCommand extends Command {
+public class ElevatorMovementCommand extends Command {
 
-    public ClaspCommand() {
+	private float desiredHeight;
+	
+    public ElevatorMovementCommand(float desiredHeight) {
         // Use requires() here to declare subsystem dependencies
-        requires(Robot.mjSubsystem);
+    	//if(Robot.operator.buttons[1].get()) end();
+    	
+        requires(Robot.elevatorSubsystem);
+        this.desiredHeight = desiredHeight;
     }
 
     // Called just before this Command runs the first time
@@ -20,9 +25,10 @@ public class ClaspCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.gamepad.rightBumper.get()) Robot.mjSubsystem.snatch();
-    	else Robot.mjSubsystem.stop();
-    	Robot.mjSubsystem.clasp();
+    	Robot.elevatorSubsystem.setCurrentDesired(desiredHeight);
+    	double current = Robot.elevatorSubsystem.getHeight();
+    	double output = Robot.elevatorSubsystem.basicPID.getPIDOutput(current, Robot.elevatorSubsystem.getCurrentDesired());
+    	Robot.elevatorSubsystem.setMotors(output);
     }
 
     // Make this return true when this Command no longer needs to run execute()

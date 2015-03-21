@@ -82,8 +82,16 @@ public class DriveSubsystem extends Subsystem {
     	imu.zeroYaw();
     }
     
-    public float getVelocity(){
-    	return (float)leftEncoder.getRate()*INCHES_PER_TICK;
+    public double getVelocity(){
+    	return leftEncoder.getRate();//(float)leftEncoder.getRate()*INCHES_PER_TICK;
+    }
+    
+    public boolean isGoingForward(){
+    	return getVelocity() > 0;
+    }
+    
+    public boolean isGoingBackwards(){
+    	return getVelocity() < 0;
     }
     
     public float getDistance(){

@@ -20,9 +20,8 @@ public class DefaultMJCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(Robot.gamepad.rightBumper.get()) Robot.mjSubsystem.snatch();
-    	else Robot.mjSubsystem.stop();
-    	Robot.mjSubsystem.unclasp();
+    	Robot.mjSubsystem.stop();
+    	//Robot.mjSubsystem.unclasp();
     }
 
     // Make this return true when this Command no longer needs to run execute()

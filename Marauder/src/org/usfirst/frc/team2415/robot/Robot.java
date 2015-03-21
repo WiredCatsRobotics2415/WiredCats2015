@@ -7,6 +7,8 @@ import org.usfirst.frc.team2415.robot.commands.elevator.*;
 import org.usfirst.frc.team2415.robot.commands.michaelJackson.*;
 import org.usfirst.frc.team2415.robot.commands.upperCarriage.*;
 
+import edu.wpi.first.wpilibj.DigitalInput;
+
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -36,12 +38,15 @@ public class Robot extends IterativeRobot {
 	public static TokyoSubsystem tokyoSubsystem;
 	
 	private Compressor compressor;
+	public static Joystick tempStick;
 	
 	public static GamePad gamepad;
 	
 	public static WiredCatJoystick operator;
 	
 	public PeacockAutonomous autonomousCommand;
+	
+	private DigitalInput proximity;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -64,14 +69,20 @@ public class Robot extends IterativeRobot {
 		gamepad = new GamePad(0);
 		operator = new WiredCatJoystick(1);
 		
-		operator.buttons[4].whenPressed(new ElevatorLiftCommand());
-		operator.buttons[5].whenPressed(new ElevatorLowerCommand());
-		operator.buttons[6].whenPressed(new HalfHeightCommand());
-		operator.buttons[7].whenPressed(new ElevatorCapCommand());
-		operator.buttons[3].whenPressed(new TogglePokeCommand());
-		gamepad.leftTrigger.whileHeld(new ClaspCommand());
-		gamepad.rightTrigger.whileHeld(new FreeCommand());
-		gamepad.rightBumper.whileHeld(new SnatchCommand());
+		//tempStick = new Joystick(1);
+		
+		proximity = new DigitalInput(0);
+		
+		operator.buttons[1].whileHeld(new ElevatorManualCommand());
+		
+		operator.buttons[6].whenPressed(new ElevatorLiftCommand());
+		operator.buttons[7].whenPressed(new ElevatorLowerCommand());
+		operator.buttons[8].whenPressed(new HalfHeightCommand());
+		//operator.buttons[9].whenPressed(new ElevatorCapCommand());
+		operator.buttons[5].whenPressed(new TogglePokeCommand());
+		
+		gamepad.rightBumper.whileHeld(new FreeCommand());
+		gamepad.leftBumper.whileHeld(new SnatchCommand());
 		
         // instantiate the command used for the autonomous period
     }
@@ -91,7 +102,6 @@ public class Robot extends IterativeRobot {
      */
     public void autonomousPeriodic() {
         Scheduler.getInstance().run();
-        System.out.println("Drive Encoder: " + driveSubsystem.getDistance());
     }
 
     public void teleopInit() {
@@ -114,8 +124,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        System.out.println(driveSubsystem.getYaw());
-        System.out.println("Drive Encoder: " + driveSubsystem.getDistance());
+        System.out.println(proximity.get());
     }
     
     /**

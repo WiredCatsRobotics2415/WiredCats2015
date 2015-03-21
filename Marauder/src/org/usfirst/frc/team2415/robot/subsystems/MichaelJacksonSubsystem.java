@@ -25,8 +25,8 @@ public class MichaelJacksonSubsystem extends Subsystem {
 		leftHand = new Talon(RobotMap.MJ_TALONS[0]);
 		rightHand = new Talon(RobotMap.MJ_TALONS[1]);
 		
-		clasp = new Solenoid(RobotMap.PCM ,RobotMap.CLASP_SOLENOID);
-		unclasp = new Solenoid(RobotMap.PCM, RobotMap.UNCLASP_SOLENOID);
+		//clasp = new Solenoid(RobotMap.PCM ,RobotMap.CLASP_SOLENOID);
+		//unclasp = new Solenoid(RobotMap.PCM, RobotMap.UNCLASP_SOLENOID);
 	}
 	
     public void initDefaultCommand() {
@@ -44,9 +44,9 @@ public class MichaelJacksonSubsystem extends Subsystem {
     	unclasp.set(true);
     }
     
-    public void snatch(){
-    	leftHand.set(snatchSpeed);
-    	rightHand.set(-snatchSpeed);
+    public void snatch(double leftAdd, double rightAdd){
+    	leftHand.set(snatchSpeed + .5*leftAdd);
+    	rightHand.set(-snatchSpeed - .5*rightAdd);
     }
     
     public void free(){
