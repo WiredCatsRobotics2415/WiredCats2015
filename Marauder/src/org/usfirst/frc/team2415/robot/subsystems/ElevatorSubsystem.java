@@ -28,7 +28,7 @@ public class ElevatorSubsystem extends Subsystem {
     private float lastPos;
     private long lastTime;
     
-    public final float LIFT_HEIGHT = 10.0f, LOWER_HEIGHT = .05f, CAP_HEIGHT = 21.3f,
+    public final float LIFT_HEIGHT = 20.0f, LOWER_HEIGHT = .05f, CAP_HEIGHT = 21.3f,
     				   HALF_HEIGHT = (LOWER_HEIGHT + LIFT_HEIGHT) / 4;
     
     private double currentDesiredHeight = 0;

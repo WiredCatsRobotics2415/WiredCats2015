@@ -62,9 +62,9 @@ public class Robot extends IterativeRobot {
 		 */
 		
 		driveSubsystem = new DriveSubsystem();
-		//mjSubsystem = new MichaelJacksonSubsystem();
+		mjSubsystem = new MichaelJacksonSubsystem();
 		elevatorSubsystem = new ElevatorSubsystem();
-		//upperCarriageSubsystem = new UpperCarriageSubsystem();
+		upperCarriageSubsystem = new UpperCarriageSubsystem();
 		
 		gamepad = new GamePad(0);
 		operator = new WiredCatJoystick(1);
@@ -79,12 +79,10 @@ public class Robot extends IterativeRobot {
 		operator.buttons[7].whenPressed(new ElevatorLowerCommand());
 		operator.buttons[8].whenPressed(new HalfHeightCommand());
 		//operator.buttons[9].whenPressed(new ElevatorCapCommand());
-		//operator.buttons[5].whenPressed(new TogglePokeCommand());
-		/*
-		gamepad.leftTrigger.whileHeld(new ClaspCommand());
-		gamepad.rightTrigger.whileHeld(new FreeCommand());
-		gamepad.rightBumper.whileHeld(new SnatchCommand());
-		*/
+		operator.buttons[5].whenPressed(new TogglePokeCommand());
+		
+		gamepad.rightBumper.whileHeld(new FreeCommand());
+		gamepad.leftBumper.whileHeld(new SnatchCommand());
 		
         // instantiate the command used for the autonomous period
     }
@@ -126,6 +124,7 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        System.out.println(proximity.get());
     }
     
     /**

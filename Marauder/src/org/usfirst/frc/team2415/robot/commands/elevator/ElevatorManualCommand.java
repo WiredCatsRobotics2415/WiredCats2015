@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ElevatorManualCommand extends Command {
 
 	private double desired;
-	private final float MAX_CHANGE_RATE = 1;	//inches per second
+	private final float MAX_CHANGE_RATE = 3;	//inches per second
 	
 	long lastTime, currentTime;
 	

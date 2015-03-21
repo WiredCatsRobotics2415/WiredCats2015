@@ -13,7 +13,7 @@ public class ElevatorMovementCommand extends Command {
 	
     public ElevatorMovementCommand(float desiredHeight) {
         // Use requires() here to declare subsystem dependencies
-    	if(Robot.operator.buttons[1].get()) end();
+    	//if(Robot.operator.buttons[1].get()) end();
     	
         requires(Robot.elevatorSubsystem);
         this.desiredHeight = desiredHeight;
