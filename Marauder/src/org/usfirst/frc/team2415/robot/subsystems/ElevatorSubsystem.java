@@ -28,10 +28,10 @@ public class ElevatorSubsystem extends Subsystem {
     private float lastPos;
     private long lastTime;
     
-    private float liftHeight = 10.0f, lowerHeight = .05f, capHeight = 21.3f,
-    			  halfHeight = (lowerHeight + liftHeight) / 4;
+    public final float LIFT_HEIGHT = 10.0f, LOWER_HEIGHT = .05f, CAP_HEIGHT = 21.3f,
+    				   HALF_HEIGHT = (LOWER_HEIGHT + LIFT_HEIGHT) / 4;
     
-    private int currentDesiredHeight;
+    private double currentDesiredHeight = 0;
     
     public boolean isLifting = false;
 	
@@ -61,7 +61,8 @@ public class ElevatorSubsystem extends Subsystem {
     }
     
     public void setMotors(double speed){
-    	if (speed < -0.75) speed = -0.75;
+    	speed *= -1;					//flipped signs and comparison for practice bot
+    	if (speed > 0.75) speed = 0.75;
     	
     	talon1.set(speed);
     	talon2.set(speed);
@@ -98,20 +99,12 @@ public class ElevatorSubsystem extends Subsystem {
     	encoder.reset();
     }
     
-    public float getLiftHeight(){
-    	return liftHeight;
+    public void setCurrentDesired(double val){
+    	currentDesiredHeight = val;
     }
     
-    public float getLowerHeight(){
-    	return lowerHeight;
-    }
-    
-    public float getCapHeight(){
-    	return capHeight;
-    }
-    
-    public float getHalfHeight(){
-    	return halfHeight;
+    public double getCurrentDesired(){
+    	return currentDesiredHeight;
     }
     
     public void checkZero(){

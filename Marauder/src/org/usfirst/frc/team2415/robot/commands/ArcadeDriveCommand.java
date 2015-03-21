@@ -10,7 +10,9 @@ import edu.wpi.first.wpilibj.command.Command;
 public class ArcadeDriveCommand extends Command {
 	
 	private final float DEADBAND = 0;
-	private final float INTERPOLATION_FACTOR = 0;
+	private final float INTERPOLATION_FACTOR = .6f;
+	
+	private final float ACCEL_CONSTANT = 0.5f; 
 
     public ArcadeDriveCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -37,9 +39,11 @@ public class ArcadeDriveCommand extends Command {
     	double left = leftY - rightX;
     	double right = leftY + rightX;
     	
-    	//COAST CODE YA BISH
-    	
-    	if (Robot.driveSubsystem.)
+    	if ((Robot.driveSubsystem.getVelocity() > 0.1 && leftY > 0) ||
+    			(Robot.driveSubsystem.getVelocity() < -0.1 && leftY < 0)){
+    		left *= ACCEL_CONSTANT;
+    		right *= ACCEL_CONSTANT;
+    	}
     	
     	Robot.driveSubsystem.setMotors(left, -right);
     }

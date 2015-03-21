@@ -28,8 +28,8 @@ public class RobotMap {
 	
 	public static final int[] ELEVATOR_CAN_TALONS = {10,11};		//CAN module
 	
-	public static final int[] LEFT_ENCODER = {6,7};
-	public static final int[] RIGHT_ENCODER = {8,9};
+	public static final int[] RIGHT_ENCODER = {6,7};
+	public static final int[] LEFT_ENCODER = {8,9};
 	
 	public static final int EVELATOR_HALL_EFFECT = 1;	//DIO port
 	

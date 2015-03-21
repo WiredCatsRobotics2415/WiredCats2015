@@ -9,20 +9,22 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.buttons.Trigger;
 
+import java.util.HashMap;
+
 /**
- *
+ *	NOTE: there is no zeroth button. FIRST cant count.
  * @author Robotics
  */
 public class WiredCatJoystick extends Joystick{
     
-    public JoystickButton[] buttons = new JoystickButton[9];
+    public JoystickButton[] buttons = new JoystickButton[12];
     public JoystickButton trigger;
     
     public WiredCatJoystick(int port){
         super(port);
         
-        for (int i = 0; i < buttons.length; i++){
-        	buttons[i] = new JoystickButton(this, i+2);//2-10
+        for (int i = 1; i < buttons.length; i++){
+        	buttons[i] = new JoystickButton(this, i);
         }
         
         trigger = new JoystickButton(this,1);
