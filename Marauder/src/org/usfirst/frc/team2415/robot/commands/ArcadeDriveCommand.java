@@ -38,13 +38,13 @@ public class ArcadeDriveCommand extends Command {
     	
     	double left = leftY - rightX;
     	double right = leftY + rightX;
-    	
+    	/*
     	if ((Robot.driveSubsystem.getVelocity() > 0.1 && leftY > 0) ||
     			(Robot.driveSubsystem.getVelocity() < -0.1 && leftY < 0)){
     		left *= ACCEL_CONSTANT;
     		right *= ACCEL_CONSTANT;
     	}
-    	
+    	*/
     	Robot.driveSubsystem.setMotors(left, -right);
     }
 

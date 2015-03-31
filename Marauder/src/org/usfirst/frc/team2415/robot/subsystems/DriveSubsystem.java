@@ -83,7 +83,7 @@ public class DriveSubsystem extends Subsystem {
     }
     
     public double getVelocity(){
-    	return leftEncoder.getRate();//(float)leftEncoder.getRate()*INCHES_PER_TICK;
+    	return (float)leftEncoder.getRate()*INCHES_PER_TICK;
     }
     
     public boolean isGoingForward(){

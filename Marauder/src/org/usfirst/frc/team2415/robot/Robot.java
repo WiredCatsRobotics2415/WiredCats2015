@@ -34,6 +34,7 @@ public class Robot extends IterativeRobot {
 	public static MichaelJacksonSubsystem mjSubsystem;
 	public static ElevatorSubsystem elevatorSubsystem;
 	public static UpperCarriageSubsystem upperCarriageSubsystem;
+	public static KidnapperSubsystem kidnapperSubsystem;
 	
 	public static TokyoSubsystem tokyoSubsystem;
 	
@@ -65,6 +66,7 @@ public class Robot extends IterativeRobot {
 		mjSubsystem = new MichaelJacksonSubsystem();
 		elevatorSubsystem = new ElevatorSubsystem();
 		upperCarriageSubsystem = new UpperCarriageSubsystem();
+		kidnapperSubsystem = new KidnapperSubsystem();
 		
 		gamepad = new GamePad(0);
 		operator = new WiredCatJoystick(1);
@@ -75,10 +77,10 @@ public class Robot extends IterativeRobot {
 		
 		operator.buttons[1].whileHeld(new ElevatorManualCommand());
 		
-		operator.buttons[6].whenPressed(new ElevatorLiftCommand());
-		operator.buttons[7].whenPressed(new ElevatorLowerCommand());
-		operator.buttons[8].whenPressed(new HalfHeightCommand());
-		//operator.buttons[9].whenPressed(new ElevatorCapCommand());
+		operator.buttons[6].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.LIFT_HEIGHT));
+		operator.buttons[7].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.LOWER_HEIGHT));
+		operator.buttons[8].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.HALF_HEIGHT));
+		//operator.buttons[9].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.CAP_HEIGHT));
 		operator.buttons[5].whenPressed(new TogglePokeCommand());
 		
 		gamepad.rightBumper.whileHeld(new FreeCommand());
@@ -124,7 +126,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        System.out.println(proximity.get());
     }
     
     /**
