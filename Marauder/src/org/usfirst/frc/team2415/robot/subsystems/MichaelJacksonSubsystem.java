@@ -19,7 +19,7 @@ public class MichaelJacksonSubsystem extends Subsystem {
 	private Talon leftHand, rightHand;
 	private Solenoid clasp, unclasp;
 	
-	private double snatchSpeed = .5;
+	private double snatchSpeed = .75;
 	
 	public MichaelJacksonSubsystem(){
 		leftHand = new Talon(RobotMap.MJ_TALONS[0]);
@@ -45,8 +45,8 @@ public class MichaelJacksonSubsystem extends Subsystem {
     }
     
     public void snatch(double leftAdd, double rightAdd){
-    	leftHand.set(snatchSpeed + .5*leftAdd);
-    	rightHand.set(-snatchSpeed - .5*rightAdd);
+    	leftHand.set(snatchSpeed + (1-snatchSpeed)*leftAdd);
+    	rightHand.set(-snatchSpeed - (1-snatchSpeed)*rightAdd);
     }
     
     public void free(){
