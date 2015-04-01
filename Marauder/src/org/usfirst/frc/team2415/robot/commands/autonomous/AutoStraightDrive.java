@@ -35,10 +35,10 @@ public class AutoStraightDrive extends Command {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	float currVel = (float)Robot.driveSubsystem.getVelocity();
-    	double power = motionprofile.power(Robot.driveSubsystem.getDistance(), currVel);
+    	double tranPower = motionprofile.power(Robot.driveSubsystem.getDistance(), currVel);
 //    	double _____s = rotational_pid.getPIDOutput(Robot.driveSubsystem.getAngle(), 0);
     	double _____s = rotational_pid.getPIDOutput(Robot.driveSubsystem.getDistance(),this.desired_distance);
-    	double rot = rotational_pid.getPIDOutput(Robot.driveSubsystem.getYaw(), 0);
+    	double rot = rotational_pid.getPIDOutput(Robot.driveSubsystem.getAngle(), 0);
     	if (_____s > .90) _____s = .90;
     	if (_____s < -.90) _____s = -.90;
     	double leftPower = _____s - rot;

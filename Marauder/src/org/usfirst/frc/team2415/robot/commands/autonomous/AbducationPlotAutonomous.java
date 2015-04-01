@@ -26,6 +26,6 @@ public class AbducationPlotAutonomous extends CommandGroup {
         // arm.
     	addSequential(new AbductionCommand());
     	addSequential(new TimeoutCommand(.5));
-    	addSequential(new AutoStraightDrive(0));
+    	addSequential(new AutoStraightDrive(-65));
     }
 }

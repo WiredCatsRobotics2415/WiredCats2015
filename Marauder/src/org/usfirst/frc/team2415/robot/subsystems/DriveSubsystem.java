@@ -4,6 +4,7 @@ import com.kauailabs.nav6.frc.IMU;
 
 import org.usfirst.frc.team2415.robot.MotionProfile;
 import org.usfirst.frc.team2415.robot.PID;
+import org.usfirst.frc.team2415.robot.Robot;
 import org.usfirst.frc.team2415.robot.RobotMap;
 import org.usfirst.frc.team2415.robot.commands.ArcadeDriveCommand;
 
@@ -53,9 +54,7 @@ public class DriveSubsystem extends Subsystem {
         // Set the default command for a subsystem here.
     	setDefaultCommand(new ArcadeDriveCommand());
     }
-    /**Set the speed of each drive motor.
-     * @param left speed value for the left motor between -1 and 1
-     * @param right speed value for the right motor between -1 and 1*/
+    
     public void setMotors(double left, double right){
     	this.left.set(left);
     	this.right.set(right);
@@ -83,24 +82,28 @@ public class DriveSubsystem extends Subsystem {
     }
     
     public double getVelocity(){
-    	return (float)leftEncoder.getRate()*INCHES_PER_TICK;
+    	return (Robot.driveSubsystem.getLeftVelocity() + Robot.driveSubsystem.getRightVelocity()) / 2;
+    }
+    
+    public double getLeftVelocity(){
+    	return leftEncoder.getRate()*INCHES_PER_TICK;
+    }
+    
+    public double getRightVelocity(){
+    	return -rightEncoder.getRate()*INCHES_PER_TICK;
     }
     
     public boolean isGoingForward(){
-    	return getVelocity() > 0;
+    	return getLeftVelocity() > 0;
     }
     
     public boolean isGoingBackwards(){
-    	return getVelocity() < 0;
+    	return getLeftVelocity() < 0;
     }
     
     public float getDistance(){
     	int ticks = getLeftEncoder();
     	return INCHES_PER_TICK * ticks;
-    }
-    
-    public float getYaw(){
-    	return imu.getYaw();
     }
     
 }
