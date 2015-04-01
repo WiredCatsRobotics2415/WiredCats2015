@@ -37,7 +37,7 @@ public class AutoStraightDrive extends Command {
     	float currVel = (float)Robot.driveSubsystem.getVelocity();
     	double tranPower = motionprofile.power(Robot.driveSubsystem.getDistance(), currVel);
 //    	double _____s = rotational_pid.getPIDOutput(Robot.driveSubsystem.getAngle(), 0);
-    	double rotPower = rotational_pid.getPIDOutput(Robot.driveSubsystem.getDistance(),this.desired_distance);
+    	double _____s = rotational_pid.getPIDOutput(Robot.driveSubsystem.getDistance(),this.desired_distance);
     	double rot = rotational_pid.getPIDOutput(Robot.driveSubsystem.getAngle(), 0);
     	if (_____s > .90) _____s = .90;
     	if (_____s < -.90) _____s = -.90;
