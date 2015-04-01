@@ -29,7 +29,7 @@ public class RobotMap {
 	public static final int[] RIGHT_ENCODER = {6,7};
 	public static final int[] LEFT_ENCODER = {8,9};
 	
-	public static final int EVELATOR_HALL_EFFECT = 1;	//DIO port
+	public static final int EVELATOR_HALL = 1;	//DIO port
 	
 	public static final int[] ELEVATOR_ENCODER = {5,4};
 	
