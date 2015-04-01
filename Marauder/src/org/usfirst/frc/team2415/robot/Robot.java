@@ -1,13 +1,9 @@
 
 package org.usfirst.frc.team2415.robot;
 
-import org.usfirst.frc.team2415.robot.commands.autonomous.PeacockAutonomous;
-import org.usfirst.frc.team2415.robot.commands.autonomous.SimpleAutoCommand;
 import org.usfirst.frc.team2415.robot.commands.elevator.*;
 import org.usfirst.frc.team2415.robot.commands.michaelJackson.*;
 import org.usfirst.frc.team2415.robot.commands.upperCarriage.*;
-
-import edu.wpi.first.wpilibj.DigitalInput;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -17,8 +13,6 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import org.usfirst.frc.team2415.robot.subsystems.*;
-
-import edu.wpi.first.wpilibj.Joystick;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -36,18 +30,12 @@ public class Robot extends IterativeRobot {
 	public static UpperCarriageSubsystem upperCarriageSubsystem;
 	public static KidnapperSubsystem kidnapperSubsystem;
 	
-	public static TokyoSubsystem tokyoSubsystem;
-	
 	private Compressor compressor;
 	public static Joystick tempStick;
 	
 	public static GamePad gamepad;
 	
 	public static WiredCatJoystick operator;
-	
-	public PeacockAutonomous autonomousCommand;
-	
-	private DigitalInput proximity;
 
     /**
      * This function is run when the robot is first started up and should be
@@ -71,16 +59,10 @@ public class Robot extends IterativeRobot {
 		gamepad = new GamePad(0);
 		operator = new WiredCatJoystick(1);
 		
-		//tempStick = new Joystick(1);
-		
-		proximity = new DigitalInput(0);
-		
-		operator.buttons[1].whileHeld(new ElevatorManualCommand());
-		
 		operator.buttons[6].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.LIFT_HEIGHT));
 		operator.buttons[7].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.LOWER_HEIGHT));
 		operator.buttons[8].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.HALF_HEIGHT));
-		//operator.buttons[9].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.CAP_HEIGHT));
+		operator.buttons[9].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.CAP_HEIGHT));
 		operator.buttons[5].whenPressed(new TogglePokeCommand());
 		
 		gamepad.rightBumper.whileHeld(new FreeCommand());
@@ -95,8 +77,6 @@ public class Robot extends IterativeRobot {
 
     public void autonomousInit() {
         // schedule the autonomous command (example)
-    	autonomousCommand = new PeacockAutonomous();
-        if (autonomousCommand != null) autonomousCommand.start();
     }
 
     /**

@@ -8,13 +8,11 @@ import edu.wpi.first.wpilibj.command.Command;
  *
  */
 public class ElevatorMovementCommand extends Command {
-
-	private float desiredHeight;
+	
+	float desiredHeight;
 	
     public ElevatorMovementCommand(float desiredHeight) {
         // Use requires() here to declare subsystem dependencies
-    	//if(Robot.operator.buttons[1].get()) end();
-    	
         requires(Robot.elevatorSubsystem);
         this.desiredHeight = desiredHeight;
     }
@@ -25,9 +23,8 @@ public class ElevatorMovementCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.elevatorSubsystem.setCurrentDesired(desiredHeight);
     	double current = Robot.elevatorSubsystem.getHeight();
-    	double output = Robot.elevatorSubsystem.basicPID.getPIDOutput(current, Robot.elevatorSubsystem.getCurrentDesired());
+    	double output = Robot.elevatorSubsystem.basicPID.getPIDOutput(current, desiredHeight);
     	Robot.elevatorSubsystem.setMotors(output);
     }
 

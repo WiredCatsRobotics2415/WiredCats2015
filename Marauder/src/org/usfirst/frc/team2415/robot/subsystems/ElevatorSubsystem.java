@@ -28,14 +28,10 @@ public class ElevatorSubsystem extends Subsystem {
     private float lastPos;
     private long lastTime;
     
-    public final float LIFT_HEIGHT = 20.0f, LOWER_HEIGHT = .05f, CAP_HEIGHT = 21.3f,
-    				   HALF_HEIGHT = (LOWER_HEIGHT + LIFT_HEIGHT) / 4;
-    
-    private double currentDesiredHeight = 0;
+    public final float LIFT_HEIGHT = 20, LOWER_HEIGHT = 1, CAP_HEIGHT = 62,
+    				   HALF_HEIGHT = (LOWER_HEIGHT + LIFT_HEIGHT) / 4 + 3;
     
     public boolean isLifting = false;
-	
-    private boolean lastHallState;
     
     private Encoder encoder;
     
@@ -76,43 +72,12 @@ public class ElevatorSubsystem extends Subsystem {
     	return encoder.get() * INCH_PER_TICKS;
     }
     
-    /*getVelocity version 1
-    public float getVelocity(){
-    	float currPos = getHeight();
-    	long currTime = System.currentTimeMillis();
-    	
-    	float distance = currPos - lastPos;
-    	float time = (currTime - lastTime) / 1000.0f;
-    	
-    	lastPos = currPos;
-    	lastTime = currTime;
-    	
-    	return distance / time;
-    }*/
-    
-    //getVelocity version 2
     public float getVelocity(){
     	return (float)encoder.getRate() * INCH_PER_TICKS;
     }
     
     public void resetEncoder(){
     	encoder.reset();
-    }
-    
-    public void setCurrentDesired(double val){
-    	currentDesiredHeight = val;
-    }
-    
-    public double getCurrentDesired(){
-    	return currentDesiredHeight;
-    }
-    
-    public void checkZero(){
-    	boolean currentState = getHallEffect();
-    	if(currentState != lastHallState){
-    		encoder.reset();
-    	}
-    	lastHallState = currentState;
     }
 }
 

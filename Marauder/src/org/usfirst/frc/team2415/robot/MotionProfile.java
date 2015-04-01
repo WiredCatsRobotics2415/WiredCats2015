@@ -47,15 +47,14 @@ public class MotionProfile {
 	 * @return
 	 */
 	public float power(float currPos, float currVel){
-		float power = 0;
-		float desVel = 0;
+		float power = 0, desVel = 0;
 		error = desired-currPos;
 		
 		//first part of trapezoid; the line that goes up
 		if (error < .5*totalDistance){
 			desVel = dv_over_dx*error + MINIMUM_VELOCITY;
 		} else {
-			desVel = -dv_over_dx*(error - totalDistance);
+			desVel = dv_over_dx*(totalDistance - error);
 		}
 		
 		//now that we've determined the correct velocity 

@@ -17,36 +17,21 @@ public class MichaelJacksonSubsystem extends Subsystem {
     // here. Call these from Commands.
 	
 	private Talon leftHand, rightHand;
-	private Solenoid clasp, unclasp;
 	
 	private double snatchSpeed = .75;
 	
 	public MichaelJacksonSubsystem(){
 		leftHand = new Talon(RobotMap.MJ_TALONS[0]);
 		rightHand = new Talon(RobotMap.MJ_TALONS[1]);
-		
-		//clasp = new Solenoid(RobotMap.PCM ,RobotMap.CLASP_SOLENOID);
-		//unclasp = new Solenoid(RobotMap.PCM, RobotMap.UNCLASP_SOLENOID);
 	}
 	
     public void initDefaultCommand() {
         setDefaultCommand(new DefaultMJCommand());
     }
     
-    /**Activate the pistons of the intake system to clamp the arms onto */
-    public void clasp(){
-    	clasp.set(true);
-    	unclasp.set(false);
-    }
-    
-    public void unclasp(){
-    	clasp.set(false);
-    	unclasp.set(true);
-    }
-    
     public void snatch(double leftAdd, double rightAdd){
-    	leftHand.set(snatchSpeed + (1-snatchSpeed)*leftAdd);
-    	rightHand.set(-snatchSpeed - (1-snatchSpeed)*rightAdd);
+    	leftHand.set(snatchSpeed);
+    	rightHand.set(-snatchSpeed);
     }
     
     public void free(){
