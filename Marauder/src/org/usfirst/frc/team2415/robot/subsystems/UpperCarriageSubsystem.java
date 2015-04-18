@@ -14,14 +14,20 @@ public class UpperCarriageSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private Solenoid poke, unpoke;
+	private Solenoid poke, unpoke, toppoke, topunpoke;
 	
 	private boolean isPoking;
+	private boolean isTopPoking;
 	
 	public UpperCarriageSubsystem(){
 		poke = new Solenoid(RobotMap.PCM, RobotMap.POKE);
 		unpoke = new Solenoid(RobotMap.PCM, RobotMap.UNPOKE);
+		
+		toppoke = new Solenoid(RobotMap.PCM, RobotMap.POKE_TOP);
+		topunpoke = new Solenoid(RobotMap.PCM, RobotMap.UNPOKE_TOP);
+		
 		unpoke();
+		topunpoke();
 	}
 	
     public void initDefaultCommand() {
@@ -42,6 +48,22 @@ public class UpperCarriageSubsystem extends Subsystem {
     
     public boolean isPoking(){
     	return isPoking;
+    }
+    
+    public void toppoke(){
+    	toppoke.set(true);
+    	topunpoke.set(false);
+    	isTopPoking = true;
+    }
+    
+    public void topunpoke(){
+    	toppoke.set(false);
+    	topunpoke.set(true);
+    	isTopPoking = false;
+    }
+    
+    public boolean isTopPoking(){
+    	return isTopPoking;
     }
 }
 

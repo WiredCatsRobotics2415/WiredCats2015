@@ -3,6 +3,8 @@ package org.usfirst.frc.team2415.robot.subsystems;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DigitalInput;
+
 
 import org.usfirst.frc.team2415.robot.RobotMap;
 import org.usfirst.frc.team2415.robot.commands.michaelJackson.DefaultMJCommand;
@@ -18,18 +20,31 @@ public class MichaelJacksonSubsystem extends Subsystem {
 	
 	private Talon leftHand, rightHand;
 	
+	private DigitalInput proximity;
+	
 	private double snatchSpeed = .75;
 	
 	public MichaelJacksonSubsystem(){
 		leftHand = new Talon(RobotMap.MJ_TALONS[0]);
 		rightHand = new Talon(RobotMap.MJ_TALONS[1]);
+		
+		proximity = new DigitalInput(RobotMap.PROXIMITY);
 	}
 	
     public void initDefaultCommand() {
         setDefaultCommand(new DefaultMJCommand());
     }
     
-    public void snatch(double leftAdd, double rightAdd){
+    public boolean getProximity(){
+    	return proximity.get();
+    }
+    
+    public void snatch(){
+    	if(proximity.get()){
+    		leftHand.set(snatchSpeed*.75);
+    		rightHand.set(-snatchSpeed*.75);
+    		return;
+    	}
     	leftHand.set(snatchSpeed);
     	rightHand.set(-snatchSpeed);
     }
