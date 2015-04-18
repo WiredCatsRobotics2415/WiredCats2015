@@ -12,7 +12,13 @@ public class ArcadeDriveCommand extends Command {
 	private final float DEADBAND = 0;
 	private final float INTERPOLATION_FACTOR = .6f;
 	
-	private final float ACCEL_CONSTANT = 0.5f; 
+	private final float ACCEL_CONSTANT = 0.75f; 
+	
+	private double currentSpeed = 0;
+	private final float DIFF_CONTROL = 0.05f;
+	private final float ACCEL_ADD = 0.01f;
+	
+	long lastTime = 0;
 
     public ArcadeDriveCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -27,6 +33,11 @@ public class ArcadeDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (lastTime == 0) lastTime = System.currentTimeMillis();
+    	
+    	long currTime = System.currentTimeMillis();
+    	float timePassed = (currTime - lastTime) / 1000.0f;
+    	
     	double leftY = Robot.gamepad.leftY();
     	double rightX = Robot.gamepad.rightX();
     	
@@ -35,16 +46,32 @@ public class ArcadeDriveCommand extends Command {
     	
     	leftY = INTERPOLATION_FACTOR*Math.pow(leftY, 3) + (1 - INTERPOLATION_FACTOR)*leftY;
     	rightX = INTERPOLATION_FACTOR*Math.pow(rightX, 3) + (1 - INTERPOLATION_FACTOR)*rightX;
+
+    	
+    	//WARNING INCOMING BEN & OMARI CODE THIS JUST MIGHT MAKE THE ROBOT EXPLODE
+    	
+    	
+    	double diffSpeed = Math.abs(leftY - currentSpeed);
+    	if (diffSpeed > DIFF_CONTROL){
+    		double addSpeed = timePassed*Math.copySign(ACCEL_ADD, -currentSpeed);
+    		leftY += addSpeed;
+    	}
+    	
+    	currentSpeed = leftY;
+    	lastTime = currTime;
     	
     	double left = leftY - rightX;
     	double right = leftY + rightX;
-    	/*
+    	
+    	/* Coasting Version 1
     	if ((Robot.driveSubsystem.getVelocity() > 0.1 && leftY > 0) ||
     			(Robot.driveSubsystem.getVelocity() < -0.1 && leftY < 0)){
     		left *= ACCEL_CONSTANT;
     		right *= ACCEL_CONSTANT;
+    		System.out.println("Coasting");
     	}
     	*/
+    	
     	Robot.driveSubsystem.setMotors(left, -right);
     }
 
