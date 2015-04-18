@@ -86,11 +86,11 @@ public class DriveSubsystem extends Subsystem {
     }
     
     public double getLeftVelocity(){
-    	return leftEncoder.getRate()*INCHES_PER_TICK;
+    	return -leftEncoder.getRate()*INCHES_PER_TICK;
     }
     
     public double getRightVelocity(){
-    	return -rightEncoder.getRate()*INCHES_PER_TICK;
+    	return rightEncoder.getRate()*INCHES_PER_TICK;
     }
     
     public boolean isGoingForward(){

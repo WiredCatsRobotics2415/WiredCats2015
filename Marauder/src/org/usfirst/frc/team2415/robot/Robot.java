@@ -2,6 +2,7 @@
 package org.usfirst.frc.team2415.robot;
 
 import org.usfirst.frc.team2415.robot.commands.elevator.*;
+import org.usfirst.frc.team2415.robot.commands.abductor.*;
 import org.usfirst.frc.team2415.robot.commands.michaelJackson.*;
 import org.usfirst.frc.team2415.robot.commands.upperCarriage.*;
 
@@ -36,7 +37,7 @@ public class Robot extends IterativeRobot {
 	public static GamePad gamepad;
 	
 	public static WiredCatJoystick operator;
-
+	
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
@@ -58,12 +59,18 @@ public class Robot extends IterativeRobot {
 		
 		gamepad = new GamePad(0);
 		operator = new WiredCatJoystick(1);
+		//tempStick = new Joystick(0);
 		
 		operator.buttons[6].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.LIFT_HEIGHT));
 		operator.buttons[7].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.LOWER_HEIGHT));
 		operator.buttons[8].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.HALF_HEIGHT));
-		operator.buttons[9].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.CAP_HEIGHT));
+		//operator.buttons[9].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.CAP_HEIGHT));
+		
 		operator.buttons[5].whenPressed(new TogglePokeCommand());
+		operator.buttons[4].whenPressed(new ToggleTopPokeCommand());
+		
+		operator.buttons[11].whileHeld(new ZeroingCommand());
+		operator.buttons[10].whenPressed(new AbductionCommand());
 		
 		gamepad.rightBumper.whileHeld(new FreeCommand());
 		gamepad.leftBumper.whileHeld(new SnatchCommand());

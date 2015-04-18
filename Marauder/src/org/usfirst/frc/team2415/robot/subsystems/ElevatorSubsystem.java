@@ -28,7 +28,7 @@ public class ElevatorSubsystem extends Subsystem {
     private long lastTime;
     
     public final float LIFT_HEIGHT = 20, LOWER_HEIGHT = 1, CAP_HEIGHT = 62,
-    				   HALF_HEIGHT = (LOWER_HEIGHT + LIFT_HEIGHT) / 4 + 3;
+    				   HALF_HEIGHT = (LOWER_HEIGHT + LIFT_HEIGHT) / 4;
     
     private boolean hallState;
     
@@ -44,7 +44,7 @@ public class ElevatorSubsystem extends Subsystem {
 		
 		encoder = new Encoder(RobotMap.ELEVATOR_ENCODER[0], RobotMap.ELEVATOR_ENCODER[1]);
 		
-		hallEffect = new DigitalInput(RobotMap.EVELATOR_HALL);
+		hallEffect = new DigitalInput(RobotMap.ELEVATOR_HALL);
 		
 		hallState = hallEffect.get();
     }
