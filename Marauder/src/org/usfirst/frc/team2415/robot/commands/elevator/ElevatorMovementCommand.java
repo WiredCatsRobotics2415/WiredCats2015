@@ -3,6 +3,7 @@ package org.usfirst.frc.team2415.robot.commands.elevator;
 import org.usfirst.frc.team2415.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 
 /**
  *
@@ -23,6 +24,8 @@ public class ElevatorMovementCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	SmartDashboard.putNumber("Elevator Height", Robot.elevatorSubsystem.getHeight());
+    	
     	double current = Robot.elevatorSubsystem.getHeight();
     	double output = Robot.elevatorSubsystem.basicPID.getPIDOutput(current, desiredHeight);
     	Robot.elevatorSubsystem.setMotors(output);
