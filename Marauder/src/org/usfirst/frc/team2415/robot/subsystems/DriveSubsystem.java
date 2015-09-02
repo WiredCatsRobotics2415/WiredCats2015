@@ -21,7 +21,8 @@ public class DriveSubsystem extends Subsystem {
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
 	
-	private final float INCHES_PER_TICK = 0.070093f;
+	
+	private final float INCHES_PER_TICK = Robot.InchesPerTick;
 	
 	private final int BAUD_RATE = 57600;
 	
@@ -37,6 +38,7 @@ public class DriveSubsystem extends Subsystem {
 	private IMU imu;
 	
 	public DriveSubsystem(){
+		
 		System.out.println("Drive Subsystem Created!");
 		left = new Talon(RobotMap.LEFT_TALON);
 		right = new Talon(RobotMap.RIGHT_TALON);

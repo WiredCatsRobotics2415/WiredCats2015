@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 
 import org.usfirst.frc.team2415.robot.subsystems.*;
 
@@ -37,6 +38,9 @@ public class Robot extends IterativeRobot {
 	public static GamePad gamepad;
 	
 	public static WiredCatJoystick operator;
+	
+	SendableChooser inchesPerTick;
+	public static float InchesPerTick;
 	
     /**
      * This function is run when the robot is first started up and should be
@@ -76,6 +80,27 @@ public class Robot extends IterativeRobot {
 		gamepad.leftBumper.whileHeld(new SnatchCommand());
 		
         // instantiate the command used for the autonomous period
+		
+		/*SMART DASHBOARD*/
+		SmartDashboard.putData(Scheduler.getInstance());
+		
+		//Elevator Stuff
+		SmartDashboard.putNumber("Elevator Height", Robot.elevatorSubsystem.getHeight());
+		
+		//Michael Jackson Stuff
+		SmartDashboard.putBoolean("Reduced Intake Speed?", Robot.mjSubsystem.getProximity())
+		;
+		//Upper Carriage Stuff
+		SmartDashboard.putBoolean("Is it Poking?", Robot.upperCarriageSubsystem.isPoking());
+		
+		//Drive Stuff
+		SmartDashboard.putNumber("Left Velocity", Robot.driveSubsystem.getLeftVelocity());
+		SmartDashboard.putNumber("Right Velocity", Robot.driveSubsystem.getRightVelocity());
+		inchesPerTick = new SendableChooser();
+		inchesPerTick.addDefault("Competition Bot", 0.070093f);
+		//inchesPerTick.addObject("Practice Bot", INSERT THE THINGY HERE);
+		InchesPerTick = (float) inchesPerTick.getSelected();
+		
     }
 	
 	public void disabledPeriodic() {

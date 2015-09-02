@@ -34,8 +34,8 @@ public class ArcadeDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	SmartDashboard.putNumber("LeftVelocity", Robot.driveSubsystem.getLeftVelocity());
-    	SmartDashboard.putNumber("RightVelocity", Robot.driveSubsystem.getRightVelocity());
+    	SmartDashboard.putNumber("LeftVelocity1", Robot.driveSubsystem.getLeftVelocity());
+    	SmartDashboard.putNumber("RightVelocity1", Robot.driveSubsystem.getRightVelocity());
     	
     	if (lastTime == 0) lastTime = System.currentTimeMillis();
     	
