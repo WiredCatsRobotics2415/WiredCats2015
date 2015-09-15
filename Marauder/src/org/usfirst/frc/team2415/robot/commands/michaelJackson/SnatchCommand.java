@@ -3,6 +3,7 @@ package org.usfirst.frc.team2415.robot.commands.michaelJackson;
 import org.usfirst.frc.team2415.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -22,6 +23,10 @@ public class SnatchCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	SmartDashboard.putBoolean("IsToteIn?1", Robot.mjSubsystem.getProximity());
+    	SmartDashboard.putNumber("LeftIntakeSpeed1", Robot.mjSubsystem.getLeftSnatchSpeed());
+    	SmartDashboard.putNumber("RightIntakeSpeed1", Robot.mjSubsystem.getRightSnatchSpeed());
+    	
     	Robot.mjSubsystem.snatch();
     }
 

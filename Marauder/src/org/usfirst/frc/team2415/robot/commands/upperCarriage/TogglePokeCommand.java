@@ -3,6 +3,7 @@ package org.usfirst.frc.team2415.robot.commands.upperCarriage;
 import org.usfirst.frc.team2415.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -22,6 +23,7 @@ public class TogglePokeCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    SmartDashboard.putBoolean( "isItPoking?1", Robot.upperCarriageSubsystem.isPoking());
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -3,6 +3,7 @@ package org.usfirst.frc.team2415.robot.commands;
 import org.usfirst.frc.team2415.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -33,6 +34,9 @@ public class ArcadeDriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	SmartDashboard.putNumber("LeftVelocity1", Robot.driveSubsystem.getLeftVelocity());
+    	SmartDashboard.putNumber("RightVelocity1", Robot.driveSubsystem.getRightVelocity());
+    	
     	if (lastTime == 0) lastTime = System.currentTimeMillis();
     	
     	long currTime = System.currentTimeMillis();

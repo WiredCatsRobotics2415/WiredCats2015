@@ -35,6 +35,14 @@ public class MichaelJacksonSubsystem extends Subsystem {
         setDefaultCommand(new DefaultMJCommand());
     }
     
+    public double getLeftSnatchSpeed(){
+    	return leftHand.getSpeed();
+    }
+    
+    public double getRightSnatchSpeed(){
+    	return rightHand.getSpeed();
+    }
+    
     public boolean getProximity(){
     	return proximity.get();
     }
