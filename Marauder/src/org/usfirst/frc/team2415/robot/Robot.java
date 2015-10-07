@@ -71,10 +71,10 @@ public class Robot extends IterativeRobot {
 		//operator.buttons[9].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.CAP_HEIGHT));
 		
 		operator.buttons[5].whenPressed(new TogglePokeCommand());
-		operator.buttons[4].whenPressed(new ToggleTopPokeCommand());
 		
 		operator.buttons[11].whileHeld(new ZeroingCommand());
 		operator.buttons[10].whenPressed(new AbductionCommand());
+		
 		
 		gamepad.rightBumper.whileHeld(new FreeCommand());
 		gamepad.leftBumper.whileHeld(new SnatchCommand());
@@ -96,11 +96,12 @@ public class Robot extends IterativeRobot {
 		//Drive Stuff
 		SmartDashboard.putNumber("Left Velocity", Robot.driveSubsystem.getLeftVelocity());
 		SmartDashboard.putNumber("Right Velocity", Robot.driveSubsystem.getRightVelocity());
+		/*
 		inchesPerTick = new SendableChooser();
 		inchesPerTick.addDefault("Competition Bot", 0.070093f);
 		//inchesPerTick.addObject("Practice Bot", INSERT THE THINGY HERE);
 		InchesPerTick = (float) inchesPerTick.getSelected();
-		
+		*/
     }
 	
 	public void disabledPeriodic() {

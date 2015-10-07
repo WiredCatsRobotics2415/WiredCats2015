@@ -21,8 +21,8 @@ public class ElevatorSubsystem extends Subsystem {
 	
     MotionProfile basicProfile = new MotionProfile(.25f, 1f, .01f);
     
-    //private final float INCH_PER_TICKS = 1/28.5f;	//for the competition bot
-    private final float INCH_PER_TICKS = 1/63.9f;	//for the practice bot
+    private final float INCH_PER_TICKS = 1/28.5f;	//for the competition bot
+    //private final float INCH_PER_TICKS = 1/63.9f;	//for the practice bot
     
     private float lastPos;
     private long lastTime;

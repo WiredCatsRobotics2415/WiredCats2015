@@ -22,7 +22,7 @@ public class DriveSubsystem extends Subsystem {
     // here. Call these from Commands.
 	
 	
-	private final float INCHES_PER_TICK = Robot.InchesPerTick;
+	private final float INCHES_PER_TICK = 0.070093f;
 	
 	private final int BAUD_RATE = 57600;
 	
