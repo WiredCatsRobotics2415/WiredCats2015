@@ -15,18 +15,14 @@ public class KidnapperSubsystem extends Subsystem {
 	
 	private Solenoid up, down;
 	
-	private Talon left, right;
-	
 	public boolean isDown;
 	
 	public KidnapperSubsystem(){
-		
-		left = new Talon(RobotMap.HOOK_LEFT);
-		right = new Talon(RobotMap.HOOK_RIGHT);
-		
-		//up();
+		up = new Solenoid(RobotMap.PCM, RobotMap.HOOK_UP);
+		down = new Solenoid(RobotMap.PCM, RobotMap.HOOK_DOWN);
+		up();
 	}
-	/*
+	
 	public void up(){
 		down.set(false);
 		up.set(true);
@@ -37,11 +33,6 @@ public class KidnapperSubsystem extends Subsystem {
 		down.set(true);
 		up.set(false);
 		isDown = true;
-	}*/
-	
-	public void setMotors(double speed){
-		left.set(speed);
-		right.set(speed);
 	}
 	
     public void initDefaultCommand() {

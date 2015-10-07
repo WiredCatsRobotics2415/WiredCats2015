@@ -33,16 +33,11 @@ public class RobotMap {
 	
 	public static final int[] ELEVATOR_ENCODER = {4,5};
 	
-	public static final int UNPOKE = 0;
-	public static final int POKE = 1;
-	public static final int UNPOKE_TOP = 2;
-	public static final int POKE_TOP = 3;
+	public static final int UNPOKE = 4;
+	public static final int POKE = 5;
 	
-	public static final int HOOK_UP = 9;
-	public static final int HOOK_DOWN = 9;
-	
-	public static final int HOOK_LEFT = 9;
-	public static final int HOOK_RIGHT = 9;
+	public static final int HOOK_UP = 1;
+	public static final int HOOK_DOWN = 0;
 	
 	public static final int PROXIMITY = 0;	//DIO port
 	
