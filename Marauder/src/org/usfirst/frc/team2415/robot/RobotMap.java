@@ -33,8 +33,8 @@ public class RobotMap {
 	
 	public static final int[] ELEVATOR_ENCODER = {4,5};
 	
-	public static final int UNPOKE = 0;
-	public static final int POKE = 1;
+	public static final int UNPOKE = 5;
+	public static final int POKE = 4;
 	
 	public static final int HOOK_UP = 1;
 	public static final int HOOK_DOWN = 0;

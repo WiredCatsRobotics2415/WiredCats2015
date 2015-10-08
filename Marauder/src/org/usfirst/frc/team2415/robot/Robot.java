@@ -73,7 +73,7 @@ public class Robot extends IterativeRobot {
 		operator.buttons[5].whenPressed(new TogglePokeCommand());
 		
 		operator.buttons[11].whileHeld(new ZeroingCommand());
-		operator.buttons[10].whenPressed(new AbductionCommand());
+		operator.buttons[4].whenPressed(new ToggleKidnapCommand());
 		
 		
 		gamepad.rightBumper.whileHeld(new FreeCommand());
@@ -139,7 +139,6 @@ public class Robot extends IterativeRobot {
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
-        System.out.println(elevatorSubsystem.getHallEffect());
     }
     
     /**

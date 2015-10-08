@@ -23,7 +23,7 @@ public class TogglePokeCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    SmartDashboard.putBoolean( "is it poking?", Robot.upperCarriageSubsystem.isPoking());
+    SmartDashboard.putBoolean( "isItPoking?1", Robot.upperCarriageSubsystem.isPoking());
     }
 
     // Make this return true when this Command no longer needs to run execute()
