@@ -20,7 +20,6 @@ public class KidnapperSubsystem extends Subsystem {
 	public KidnapperSubsystem(){
 		up = new Solenoid(RobotMap.PCM, RobotMap.HOOK_UP);
 		down = new Solenoid(RobotMap.PCM, RobotMap.HOOK_DOWN);
-		up();
 	}
 	
 	public void up(){
@@ -33,6 +32,10 @@ public class KidnapperSubsystem extends Subsystem {
 		down.set(true);
 		up.set(false);
 		isDown = true;
+	}
+	
+	public boolean isDown(){
+		return isDown;
 	}
 	
     public void initDefaultCommand() {
