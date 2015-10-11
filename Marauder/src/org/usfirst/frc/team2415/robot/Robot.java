@@ -76,8 +76,8 @@ public class Robot extends IterativeRobot {
 		operator.buttons[4].whenPressed(new ToggleKidnapCommand());
 		
 		
-		gamepad.rightBumper.whileHeld(new FreeCommand());
-		gamepad.leftBumper.whileHeld(new SnatchCommand());
+		gamepad.b_button.whileHeld(new FreeCommand());
+		gamepad.a_button.whileHeld(new SnatchCommand());
 		
         // instantiate the command used for the autonomous period
 		

@@ -32,6 +32,8 @@ public class DriveSubsystem extends Subsystem {
 	
 	private Encoder leftEncoder, rightEncoder;
 	
+	private final double SPEED_MULTIPLIER = 0.6;
+	
 	public MotionProfile motionprofile;
 	public PID rotational_pid;
 	
@@ -58,8 +60,8 @@ public class DriveSubsystem extends Subsystem {
     }
     
     public void setMotors(double left, double right){
-    	this.left.set(left);
-    	this.right.set(right);
+    	this.left.set(left*SPEED_MULTIPLIER);
+    	this.right.set(right*SPEED_MULTIPLIER);
     }
     
     public int getLeftEncoder(){
