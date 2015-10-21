@@ -86,6 +86,12 @@ public class Robot extends IterativeRobot {
 		
 		//Elevator Stuff
 		SmartDashboard.putNumber("Elevator Height", Robot.elevatorSubsystem.getHeight());
+
+		SmartDashboard.putData("Elevator Inches Per Tick", inchesPerTick);
+		inchesPerTick = new SendableChooser();
+		inchesPerTick.addDefault("Competition Bot", 1/28.5f);
+		inchesPerTick.addObject("Practice Bot", 1/63.9f);
+		InchesPerTick = (float) inchesPerTick.getSelected();
 		
 		//Michael Jackson Stuff
 		SmartDashboard.putBoolean("Reduced Intake Speed?", Robot.mjSubsystem.getProximity())
@@ -96,12 +102,7 @@ public class Robot extends IterativeRobot {
 		//Drive Stuff
 		SmartDashboard.putNumber("Left Velocity", Robot.driveSubsystem.getLeftVelocity());
 		SmartDashboard.putNumber("Right Velocity", Robot.driveSubsystem.getRightVelocity());
-		/*
-		inchesPerTick = new SendableChooser();
-		inchesPerTick.addDefault("Competition Bot", 0.070093f);
-		//inchesPerTick.addObject("Practice Bot", INSERT THE THINGY HERE);
-		InchesPerTick = (float) inchesPerTick.getSelected();
-		*/
+		
     }
 	
 	public void disabledPeriodic() {

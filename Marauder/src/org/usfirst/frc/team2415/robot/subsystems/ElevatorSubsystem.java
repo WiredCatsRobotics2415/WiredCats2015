@@ -2,6 +2,7 @@ package org.usfirst.frc.team2415.robot.subsystems;
 
 import org.usfirst.frc.team2415.robot.MotionProfile;
 import org.usfirst.frc.team2415.robot.PID;
+import org.usfirst.frc.team2415.robot.Robot;
 import org.usfirst.frc.team2415.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.CANTalon;
@@ -21,7 +22,9 @@ public class ElevatorSubsystem extends Subsystem {
 	
     MotionProfile basicProfile = new MotionProfile(.25f, 1f, .01f);
     
-    private final float INCH_PER_TICKS = 1/28.5f;	//for the competition bot
+    private final float INCH_PER_TICKS = Robot.InchesPerTick;
+    
+    //private final float INCH_PER_TICKS = 1/28.5f;	//for the competition bot
     //private final float INCH_PER_TICKS = 1/63.9f;	//for the practice bot
     
     private float lastPos;
