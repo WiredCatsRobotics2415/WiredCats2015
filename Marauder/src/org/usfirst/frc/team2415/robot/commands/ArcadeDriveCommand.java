@@ -48,8 +48,8 @@ public class ArcadeDriveCommand extends Command {
     	if(Math.abs(leftY) < DEADBAND) leftY = 0;
     	if(Math.abs(rightX) < DEADBAND) rightX = 0;
     	
-    	leftY = INTERPOLATION_FACTOR*Math.pow(leftY, 3) + (1 - INTERPOLATION_FACTOR)*leftY;
-    	rightX = INTERPOLATION_FACTOR*Math.pow(rightX, 3) + (1 - INTERPOLATION_FACTOR)*rightX;
+    	leftY = INTERPOLATION_FACTOR*Math.pow(leftY, 3) + (1 - INTERPOLATION_FACTOR)*leftY*Robot.speedModifier;
+    	rightX = INTERPOLATION_FACTOR*Math.pow(rightX, 3) + (1 - INTERPOLATION_FACTOR)*rightX*Robot.speedModifier;
 
     	
     	//WARNING INCOMING BEN & OMARI CODE THIS JUST MIGHT MAKE THE ROBOT EXPLODE
