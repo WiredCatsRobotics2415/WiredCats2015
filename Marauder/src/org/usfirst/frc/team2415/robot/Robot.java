@@ -40,9 +40,9 @@ public class Robot extends IterativeRobot {
 	
 	public static WiredCatJoystick operator;
 	
-	Preferences prefs;
-	public static double speedModifier;
-	public static float inchesPerTick;
+	//Preferences prefs;
+	//public static double speedModifier;
+	//public static float inchesPerTick;
 	
 	
     /**
@@ -51,7 +51,7 @@ public class Robot extends IterativeRobot {
      */
     public void robotInit() {
 		oi = new OI();
-		prefs = Preferences.getInstance();
+		//prefs = Preferences.getInstance();
 		
 		compressor = new Compressor(RobotMap.PCM);	//enter compressor port if need be
 		/*compressor should run automatically (according the api) until specifically told to stop
@@ -70,20 +70,20 @@ public class Robot extends IterativeRobot {
 		//tempStick = new Joystick(0);
 		
 		operator.buttons[6].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.LIFT_HEIGHT));
-		gamepad.x_button.whenPressed(new ElevatorMovementCommand(elevatorSubsystem.LIFT_HEIGHT));
+		gamepad.y_button.whenPressed(new ElevatorMovementCommand(elevatorSubsystem.LIFT_HEIGHT));
 		operator.buttons[7].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.LOWER_HEIGHT));
-		gamepad.y_button.whenPressed(new ElevatorMovementCommand(elevatorSubsystem.LOWER_HEIGHT));
+		gamepad.x_button.whenPressed(new ElevatorMovementCommand(elevatorSubsystem.LOWER_HEIGHT));
 		operator.buttons[8].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.HALF_HEIGHT));
 		gamepad.a_button.whenPressed(new ElevatorMovementCommand(elevatorSubsystem.HALF_HEIGHT));
-		//operator.buttons[9].whenPressed(new ElevatorMovementCommand(elevatorSubsystem.CAP_HEIGHT));
 		
 		operator.buttons[5].whenPressed(new TogglePokeCommand());
+		gamepad.b_button.whenPressed(new TogglePokeCommand());
 		
 		operator.buttons[11].whileHeld(new ZeroingCommand());
 		operator.buttons[4].whenPressed(new ToggleKidnapCommand());
 		
 		
-		gamepad.b_button.whileHeld(new FreeCommand());
+		gamepad.rightBumper.whileHeld(new FreeCommand());
 		gamepad.leftBumper.whileHeld(new SnatchCommand());
 		
         // instantiate the command used for the autonomous period
@@ -93,7 +93,7 @@ public class Robot extends IterativeRobot {
 		
 		//Elevator Stuff
 		SmartDashboard.putNumber("Elevator Height", Robot.elevatorSubsystem.getHeight());
-		inchesPerTick = prefs.getFloat("Competition: 1/28.5f || Practice: 1/63.9f", 1/28.5f);
+		//inchesPerTick = prefs.getFloat("Competition: 1/28.5f || Practice: 1/63.9f", 1/28.5f);
 		
 		//Michael Jackson Stuff
 		SmartDashboard.putBoolean("Reduced Intake Speed?", Robot.mjSubsystem.getProximity())
@@ -104,7 +104,7 @@ public class Robot extends IterativeRobot {
 		//Drive Stuff
 		SmartDashboard.putNumber("Left Velocity", Robot.driveSubsystem.getLeftVelocity());
 		SmartDashboard.putNumber("Right Velocity", Robot.driveSubsystem.getRightVelocity());
-		speedModifier = prefs.getDouble("Speed Modifier", 1.0);
+		//speedModifier = prefs.getDouble("Speed Modifier", 1.0);
 		
     }
 	
